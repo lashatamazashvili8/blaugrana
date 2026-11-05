@@ -1,6 +1,5 @@
-/**
- * feed.js — Community feed controller: posts, comments, likes, filters, image preview
- */
+import { z } from './vendor/zod.js';
+import { createFormik } from './vendor/formik.js';
 import { Storage } from './storage.js';
 import { getSession, isLoggedIn, updateNavUI } from './auth.js';
 import { initTheme, toggleTheme } from './theme.js';
@@ -9,6 +8,11 @@ import { initNav, showToast, formatRelative, seedIfNeeded } from './ui.js';
 let activeFilter = 'All';
 let currentImageData = null;
 
+const postSchema = z.object({
+  content: z.string('Please write some thoughts').min(3, 'Post must be at least 3 characters.').max(500, 'Post cannot exceed 500 characters.'),
+  tag: z.enum(['Match', 'Transfers', 'History', 'Memes'])
+});
+
 function renderFeed() {
   const posts = Storage.get('posts') || [];
   const comments = Storage.get('comments') || [];
@@ -16,7 +20,6 @@ function renderFeed() {
   const container = document.getElementById('post-list-container');
   if (!container) return;
 
-  // Filter & sort
   let displayedPosts = [...posts];
 
   if (activeFilter === 'Top') {
@@ -24,7 +27,6 @@ function renderFeed() {
   } else if (activeFilter !== 'All') {
     displayedPosts = displayedPosts.filter(p => p.tag?.toLowerCase() === activeFilter.toLowerCase());
   } else {
-    // Latest first
     displayedPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
   }
 
@@ -94,24 +96,31 @@ function renderFeed() {
           </button>
         </footer>
 
-        <!-- Comments Section -->
         <section class="comments" id="comments-${post.id}" aria-label="Comments for post by ${post.username}">
           <div class="comment-list" id="comment-list-${post.id}">
-            ${postComments.length > 0 ? postComments.map(c => `
-              <div class="comment">
-                <div class="avatar" style="width:28px;height:28px;font-size:0.65rem;" aria-hidden="true">${c.username.slice(0, 2).toUpperCase()}</div>
-                <div class="comment__bubble">
-                  <div class="comment__author">@${c.username} · <span class="text-xs text-muted font-normal">${formatRelative(c.timestamp)}</span></div>
-                  <div class="comment__text">${escapeHTML(c.text)}</div>
-                </div>
-              </div>
-            `).join('') : '<p class="text-xs text-muted" style="margin-bottom:var(--sp-3);">No comments yet. Start the conversation!</p>'}
+            ${postComments.length > 0 ? postComments.map(c => {
+              const isCommentAuthor = session && (c.userId === session.userId || c.username === session.username);
+              const deleteCommentBtn = isCommentAuthor
+                ? `<button type="button" class="post-card__delete" data-delete-comment-id="${c.id}" style="margin-left:auto;font-size:11px;" title="Delete this comment line">✕ Delete</button>`
+                : '';
+
+              return `
+                <div class="comment" id="comment-${c.id}">
+                  <div class="avatar" style="width:28px;height:28px;font-size:0.65rem;" aria-hidden="true">${c.username.slice(0, 2).toUpperCase()}</div>
+                  <div class="comment__bubble" style="flex:1;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                      <span class="comment__author">@${c.username} · <span class="text-xs text-muted font-normal">${formatRelative(c.timestamp)}</span></span>
+                      ${deleteCommentBtn}
+                    </div>
+                    <div class="comment__text">${escapeHTML(c.text)}</div>
+                  </div>
+                </div>`;
+            }).join('') : '<p class="text-xs text-muted" style="margin-bottom:var(--sp-3);">No comments yet. Start the conversation!</p>'}
           </div>
 
-          <!-- Add Comment Box -->
           <form class="comment-input-row" data-comment-form="${post.id}">
             <label for="comment-field-${post.id}" class="visually-hidden">Write a comment</label>
-            <input type="text" id="comment-field-${post.id}" placeholder="${session ? 'Write a comment...' : 'Sign in to comment'}" ${!session ? 'disabled' : ''} required />
+            <input type="text" id="comment-field-${post.id}" placeholder="${session ? 'Write a comment...' : '🔒 Authorization required to comment'}" ${!session ? 'disabled' : ''} required />
             <button type="submit" class="btn btn--primary btn--sm" ${!session ? 'disabled' : ''}>Send</button>
           </form>
         </section>
@@ -134,11 +143,10 @@ function escapeHTML(str) {
 function attachEventHandlers() {
   const session = getSession();
 
-  // Like handler
   document.querySelectorAll('[data-like-id]').forEach(btn => {
     btn.addEventListener('click', () => {
       if (!isLoggedIn()) {
-        showToast('Please sign in to like posts!', 'warning');
+        showToast('Authorization required: Please sign in to like posts!', 'warning');
         return;
       }
       const postId = btn.dataset.likeId;
@@ -158,7 +166,6 @@ function attachEventHandlers() {
     });
   });
 
-  // Comments toggle
   document.querySelectorAll('[data-comment-toggle]').forEach(btn => {
     btn.addEventListener('click', () => {
       const postId = btn.dataset.commentToggle;
@@ -174,12 +181,11 @@ function attachEventHandlers() {
     });
   });
 
-  // Comment submission
   document.querySelectorAll('[data-comment-form]').forEach(form => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (!isLoggedIn()) {
-        showToast('Please sign in to comment.', 'warning');
+        showToast('Authorization required: Please sign in to write comments.', 'warning');
         return;
       }
       const postId = form.dataset.commentForm;
@@ -198,15 +204,24 @@ function attachEventHandlers() {
 
       Storage.pushTo('comments', newComment);
       input.value = '';
-      showToast('Comment posted!', 'success');
+      showToast('Comment posted and saved!', 'success');
       renderFeed();
-      // Keep comments section open
       const sec = document.getElementById(`comments-${postId}`);
       if (sec) sec.classList.add('is-open');
     });
   });
 
-  // Delete own post
+  document.querySelectorAll('[data-delete-comment-id]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const commentId = btn.dataset.deleteCommentId;
+      if (confirm('Delete this line of comment?')) {
+        Storage.removeFrom('comments', commentId);
+        showToast('Comment deleted.', 'info');
+        renderFeed();
+      }
+    });
+  });
+
   document.querySelectorAll('[data-delete-id]').forEach(btn => {
     btn.addEventListener('click', () => {
       const postId = btn.dataset.deleteId;
@@ -244,18 +259,54 @@ function initComposer() {
   const removeImgBtn = document.getElementById('img-preview-remove');
   const tagSelect = document.getElementById('post-tag-select');
 
-  // Character counter
-  textarea?.addEventListener('input', () => {
-    const remaining = 500 - textarea.value.length;
-    charCounter.textContent = remaining;
-    if (remaining < 50) {
-      charCounter.style.color = 'var(--color-garnet)';
-    } else {
-      charCounter.style.color = 'var(--color-text-muted)';
+  const composerFormik = createFormik({
+    initialValues: {
+      content: '',
+      tag: 'Match'
+    },
+    validationSchema: postSchema,
+    onSubmit: async (values, { resetForm }) => {
+      if (!isLoggedIn()) {
+        showToast('Authorization required: Please log in to publish a post.', 'warning');
+        return;
+      }
+
+      const newPost = {
+        id: 'post' + Date.now(),
+        userId: session.userId,
+        username: session.username,
+        content: values.content.trim(),
+        tag: values.tag,
+        image: currentImageData,
+        timestamp: new Date().toISOString(),
+        likes: [],
+        comments: []
+      };
+
+      Storage.pushTo('posts', newPost);
+
+      resetForm();
+      charCounter.textContent = '500';
+      currentImageData = null;
+      previewImg.src = '';
+      previewBox.classList.remove('is-visible');
+      if (fileInput) fileInput.value = '';
+
+      showToast('Your post has been published and saved to local storage!', 'success');
+      renderFeed();
     }
   });
 
-  // Image upload preview
+  textarea?.addEventListener('input', (e) => {
+    composerFormik.handleChange(e);
+    const remaining = 500 - (e.target.value?.length || 0);
+    charCounter.textContent = remaining;
+    charCounter.style.color = remaining < 50 ? 'var(--color-garnet)' : 'var(--color-text-muted)';
+  });
+  textarea?.addEventListener('blur', (e) => composerFormik.handleBlur(e));
+
+  tagSelect?.addEventListener('change', (e) => composerFormik.handleChange(e));
+
   fileInput?.addEventListener('change', () => {
     const file = fileInput.files?.[0];
     if (!file) return;
@@ -282,37 +333,14 @@ function initComposer() {
     if (fileInput) fileInput.value = '';
   });
 
-  // Form submit
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const content = textarea.value.trim();
-    if (!content) {
-      showToast('Please type some text for your post.', 'warning');
+    if (!composerFormik.isValid) {
+      const err = composerFormik.errors.content || 'Please check your post content.';
+      showToast(err, 'warning');
       return;
     }
-
-    const newPost = {
-      id: 'post' + Date.now(),
-      userId: session.userId,
-      username: session.username,
-      content,
-      tag: tagSelect.value || 'Match',
-      image: currentImageData,
-      timestamp: new Date().toISOString(),
-      likes: [],
-      comments: []
-    };
-
-    Storage.pushTo('posts', newPost);
-    textarea.value = '';
-    charCounter.textContent = '500';
-    currentImageData = null;
-    previewImg.src = '';
-    previewBox.classList.remove('is-visible');
-    if (fileInput) fileInput.value = '';
-
-    showToast('Your post has been published!', 'success');
-    renderFeed();
+    composerFormik.handleSubmit(e);
   });
 }
 
@@ -326,7 +354,6 @@ function initFilters() {
     });
   });
 
-  // Quick tag links in sidebar
   document.querySelectorAll('[data-quick]').forEach(span => {
     span.addEventListener('click', () => {
       const tag = span.dataset.quick;
