@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FC Barcelona Club History Timeline & Trophy Cabinet — Explore 125+ years of glorious Blaugrana heritage." />
+  <title>Club History & Trophies — Blaugrana Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/pages/history.css" />
+
+  <style>
+    #nav-user { display: none; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="container navbar__inner">
+        <a href="../index.html" class="navbar__brand" aria-label="Blaugrana Hub home">
+          <svg class="navbar__brand-icon" viewBox="0 0 36 36" aria-hidden="true" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#A50044" stroke="#EDBB00" stroke-width="2"/>
+            <path d="M18 4 C11 4 6 10 6 18 C6 26 11 32 18 32 C25 32 30 26 30 18 C30 10 25 4 18 4Z" fill="#004D98"/>
+            <path d="M18 4 L18 32" stroke="#EDBB00" stroke-width="2"/>
+            <path d="M6 18 L30 18" stroke="#EDBB00" stroke-width="1" stroke-opacity="0.5"/>
+            <text x="18" y="22" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="10">BH</text>
+          </svg>
+          Blaugrana <span>Hub</span>
+        </a>
+
+        <ul class="navbar__nav" role="list">
+          <li><a href="../index.html" class="navbar__link">Home</a></li>
+          <li><a href="feed.html" class="navbar__link">Community</a></li>
+          <li><a href="live.html" class="navbar__link">Live</a></li>
+          <li><a href="squad.html" class="navbar__link">Squad</a></li>
+          <li><a href="history.html" class="navbar__link is-active">History</a></li>
+          <li><a href="membership.html" class="navbar__link navbar__link--cta">Join</a></li>
+        </ul>
+
+        <div class="navbar__actions">
+          <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+
+          <button class="navbar__user" id="nav-user" aria-label="User menu" popovertarget="user-dropdown">
+            <span class="navbar__user-avatar" id="nav-user-avatar" aria-hidden="true">CD</span>
+            <span id="nav-user-label">culerdemo</span>
+          </button>
+          <div id="user-dropdown" popover style="position:fixed;top:68px;right:16px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);padding:var(--sp-2);min-width:160px;z-index:var(--z-nav);">
+            <a href="profile.html" style="display:block;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);">My Profile</a>
+            <a href="membership.html" style="display:block;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);">Membership</a>
+            <hr style="border:none;border-top:1px solid var(--color-border);margin:var(--sp-2) 0;">
+            <button id="nav-logout" style="display:block;width:100%;text-align:left;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);color:var(--color-garnet);">Log out</button>
+          </div>
+
+          <a href="auth.html" class="btn btn--outline-light btn--sm" id="nav-login">Sign In</a>
+
+          <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation menu">
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="../index.html" class="mobile-nav__link">🏠 Home</a>
+      <a href="feed.html" class="mobile-nav__link">💬 Community</a>
+      <a href="live.html" class="mobile-nav__link">📡 Live</a>
+      <a href="squad.html" class="mobile-nav__link">👥 Squad</a>
+      <a href="history.html" class="mobile-nav__link is-active">📜 History</a>
+      <div class="mobile-nav__sep" aria-hidden="true"></div>
+      <a href="membership.html" class="mobile-nav__link">⭐ Join / Upgrade</a>
+      <a href="auth.html" class="mobile-nav__link" id="mobile-login">🔑 Sign In</a>
+    </nav>
+    <div class="overlay" id="nav-overlay" aria-hidden="true"></div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="page-main section-sm">
+    <div class="container">
+      <!-- Section: Trophy Cabinet -->
+      <section aria-labelledby="cabinet-heading" style="margin-bottom:var(--sp-16);">
+        <div class="section-header">
+          <div>
+            <span class="section-header__eyebrow">Honours</span>
+            <h1 class="heading-1" id="cabinet-heading">Trophy Cabinet</h1>
+            <span class="accent-line" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="trophy-cabinet" id="trophy-cabinet-container" role="list" aria-label="Major club trophies">
+          <!-- Injected by history.js -->
+        </div>
+      </section>
+
+      <!-- Section: Historical Timeline -->
+      <section aria-labelledby="timeline-heading">
+        <div class="section-header">
+          <div>
+            <span class="section-header__eyebrow">1899 — Present</span>
+            <h2 class="heading-1" id="timeline-heading">Timeline of Legends &amp; Eras</h2>
+            <span class="accent-line" aria-hidden="true"></span>
+          </div>
+          <div class="filter-chips" role="toolbar" aria-label="Filter timeline events">
+            <button type="button" class="chip is-active" data-timeline-filter="all">All Milestones</button>
+            <button type="button" class="chip" data-timeline-filter="trophy">🏆 Trophies</button>
+            <button type="button" class="chip" data-timeline-filter="legend">⭐ Legends</button>
+            <button type="button" class="chip" data-timeline-filter="era">🏛️ Eras</button>
+          </div>
+        </div>
+
+        <div class="timeline-vert" id="timeline-container" role="feed" aria-label="Vertical history timeline">
+          <!-- Populated by history.js -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">Blaugrana <span>Hub</span></div>
+          <p class="footer__tagline">The unofficial, ad-free fan community for FC Barcelona supporters worldwide.</p>
+        </div>
+        <div>
+          <p class="footer__heading">Navigation</p>
+          <ul class="footer__links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="feed.html">Community Feed</a></li>
+            <li><a href="live.html">Live Events</a></li>
+            <li><a href="squad.html">Squad</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Community</p>
+          <ul class="footer__links">
+            <li><a href="history.html">Club History</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="profile.html">Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Disclaimer</p>
+          <p class="text-xs text-muted" style="line-height:1.5;">Historic records are compiled from public football archives for fan educational reference.</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__disclaimer">⚠️ Unofficial Fan Project — Not affiliated with FC Barcelona</p>
+        <p>© 2026 Blaugrana Hub. Ad-free fan community.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/history.js"></script>
+</body>
+</html>
