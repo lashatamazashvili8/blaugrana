@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blaugrana Hub Match Room — Live match scores, timeline, lineups, MOTM poll, and live fan chat." />
+  <title>El Clásico Match Room — Blaugrana Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/pages/match-room.css" />
+
+  <style>
+    #nav-user { display: none; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="container navbar__inner">
+        <a href="../index.html" class="navbar__brand" aria-label="Blaugrana Hub home">
+          <svg class="navbar__brand-icon" viewBox="0 0 36 36" aria-hidden="true" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#A50044" stroke="#EDBB00" stroke-width="2"/>
+            <path d="M18 4 C11 4 6 10 6 18 C6 26 11 32 18 32 C25 32 30 26 30 18 C30 10 25 4 18 4Z" fill="#004D98"/>
+            <path d="M18 4 L18 32" stroke="#EDBB00" stroke-width="2"/>
+            <path d="M6 18 L30 18" stroke="#EDBB00" stroke-width="1" stroke-opacity="0.5"/>
+            <text x="18" y="22" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="10">BH</text>
+          </svg>
+          Blaugrana <span>Hub</span>
+        </a>
+
+        <ul class="navbar__nav" role="list">
+          <li><a href="../index.html" class="navbar__link">Home</a></li>
+          <li><a href="feed.html" class="navbar__link">Community</a></li>
+          <li><a href="live.html" class="navbar__link is-active">Live</a></li>
+          <li><a href="squad.html" class="navbar__link">Squad</a></li>
+          <li><a href="history.html" class="navbar__link">History</a></li>
+          <li><a href="membership.html" class="navbar__link navbar__link--cta">Join</a></li>
+        </ul>
+
+        <div class="navbar__actions">
+          <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+
+          <button class="navbar__user" id="nav-user" aria-label="User menu" popovertarget="user-dropdown">
+            <span class="navbar__user-avatar" id="nav-user-avatar" aria-hidden="true">CD</span>
+            <span id="nav-user-label">culerdemo</span>
+          </button>
+          <div id="user-dropdown" popover style="position:fixed;top:68px;right:16px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);padding:var(--sp-2);min-width:160px;z-index:var(--z-nav);">
+            <a href="profile.html" style="display:block;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);">My Profile</a>
+            <a href="membership.html" style="display:block;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);">Membership</a>
+            <hr style="border:none;border-top:1px solid var(--color-border);margin:var(--sp-2) 0;">
+            <button id="nav-logout" style="display:block;width:100%;text-align:left;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);color:var(--color-garnet);">Log out</button>
+          </div>
+
+          <a href="auth.html" class="btn btn--outline-light btn--sm" id="nav-login">Sign In</a>
+
+          <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation menu">
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="../index.html" class="mobile-nav__link">🏠 Home</a>
+      <a href="feed.html" class="mobile-nav__link">💬 Community</a>
+      <a href="live.html" class="mobile-nav__link is-active">📡 Live</a>
+      <a href="squad.html" class="mobile-nav__link">👥 Squad</a>
+      <a href="history.html" class="mobile-nav__link">📜 History</a>
+      <div class="mobile-nav__sep" aria-hidden="true"></div>
+      <a href="membership.html" class="mobile-nav__link">⭐ Join / Upgrade</a>
+      <a href="auth.html" class="mobile-nav__link" id="mobile-login">🔑 Sign In</a>
+    </nav>
+    <div class="overlay" id="nav-overlay" aria-hidden="true"></div>
+  </header>
+
+  <!-- Live Scoreboard Header -->
+  <section class="match-header" aria-label="Live match scoreboard">
+    <div class="container">
+      <div class="match-header__teams">
+        <!-- Home Team -->
+        <div class="match-team">
+          <div class="match-team__emblem" style="background:rgba(0,77,152,0.3);border-color:#EDBB00;">
+            🔵🔴
+          </div>
+          <span class="match-team__name">FC Barcelona</span>
+        </div>
+
+        <!-- Live Score -->
+        <div class="match-score-box">
+          <div class="badge badge--live" style="margin-bottom:var(--sp-2);">LIVE 74'</div>
+          <div class="match-score" aria-label="Current score: FC Barcelona 2, Real Madrid 1">2 – 1</div>
+          <p class="match-status">Second Half · High Intensity</p>
+          <p class="match-info">La Liga EA Sports · Camp Nou, Barcelona</p>
+        </div>
+
+        <!-- Away Team -->
+        <div class="match-team">
+          <div class="match-team__emblem" style="background:rgba(255,255,255,0.15);">
+            ⚪🟣
+          </div>
+          <span class="match-team__name">Real Madrid</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Room Content -->
+  <main id="main-content" class="page-main section-sm">
+    <div class="container">
+      <div class="match-room-grid">
+        <!-- Column 1: Live Timeline -->
+        <section aria-labelledby="timeline-heading">
+          <h2 class="heading-2" id="timeline-heading" style="margin-bottom:var(--sp-4);">Match Timeline</h2>
+          <div class="timeline" role="feed" aria-label="Minute-by-minute events">
+            <div class="timeline-event timeline-event--home">
+              <span class="timeline-event__min">71'</span>
+              <span class="timeline-event__icon" aria-hidden="true">⚽</span>
+              <div class="timeline-event__detail">
+                <p class="timeline-event__player">Lamine Yamal</p>
+                <p class="timeline-event__type">Curling left-foot finish into top corner! (Assist: Pedri)</p>
+              </div>
+            </div>
+
+            <div class="timeline-event timeline-event--away">
+              <span class="timeline-event__min">58'</span>
+              <span class="timeline-event__icon" aria-hidden="true">⚽</span>
+              <div class="timeline-event__detail">
+                <p class="timeline-event__player">Vinícius Jr.</p>
+                <p class="timeline-event__type">Counter-attack finish</p>
+              </div>
+            </div>
+
+            <div class="timeline-event timeline-event--home">
+              <span class="timeline-event__min">51'</span>
+              <span class="timeline-event__icon" aria-hidden="true">🟨</span>
+              <div class="timeline-event__detail">
+                <p class="timeline-event__player">Gavi</p>
+                <p class="timeline-event__type">Tactical foul to break transition</p>
+              </div>
+            </div>
+
+            <div class="timeline-event timeline-event--home">
+              <span class="timeline-event__min">34'</span>
+              <span class="timeline-event__icon" aria-hidden="true">⚽</span>
+              <div class="timeline-event__detail">
+                <p class="timeline-event__player">Robert Lewandowski</p>
+                <p class="timeline-event__type">Header from Raphinha cross</p>
+              </div>
+            </div>
+
+            <div class="timeline-event timeline-event--home">
+              <span class="timeline-event__min">1'</span>
+              <span class="timeline-event__icon" aria-hidden="true">⏱️</span>
+              <div class="timeline-event__detail">
+                <p class="timeline-event__player">Kick-off</p>
+                <p class="timeline-event__type">Match underway at a packed Camp Nou!</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Column 2: Lineups & MOTM Poll -->
+        <section aria-labelledby="lineups-heading" style="display:flex;flex-direction:column;gap:var(--sp-6);">
+          <div>
+            <h2 class="heading-2" id="lineups-heading" style="margin-bottom:var(--sp-4);">Starting Lineups</h2>
+            <div class="card" style="padding:var(--sp-5);">
+              <div class="lineup-grid">
+                <div>
+                  <h3 class="lineup-team__heading">FC Barcelona (4-3-3)</h3>
+                  <div class="lineup-player"><span class="lineup-player__num">13</span> Iñaki Peña (GK)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">23</span> Jules Koundé (RB)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">15</span> Pau Cubarsí (CB)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">5</span> Inigo Martínez (CB)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">3</span> Alejandro Balde (LB)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">17</span> Marc Casadó (DM)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">8</span> Pedri (CM)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">20</span> Dani Olmo (AM)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">19</span> Lamine Yamal (RW)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">9</span> Lewandowski (ST)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">11</span> Raphinha (LW)</div>
+                </div>
+
+                <div>
+                  <h3 class="lineup-team__heading" style="color:var(--color-garnet);">Real Madrid (4-3-1-2)</h3>
+                  <div class="lineup-player"><span class="lineup-player__num">1</span> Courtois (GK)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">17</span> Lucas Vázquez (RB)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">3</span> Éder Militão (CB)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">22</span> Rüdiger (CB)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">23</span> Mendy (LB)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">14</span> Tchouaméni (DM)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">8</span> Valverde (CM)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">6</span> Camavinga (CM)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">5</span> Bellingham (AM)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">9</span> Mbappé (FW)</div>
+                  <div class="lineup-player"><span class="lineup-player__num">7</span> Vinícius Jr (FW)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Man of the Match Poll -->
+          <article class="poll" aria-labelledby="motm-title">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-2);">
+              <h3 class="poll__title" id="motm-title" style="margin:0;">Man of the Match Poll</h3>
+              <span class="badge badge--gold" id="poll-votes-total">1,420 votes</span>
+            </div>
+            <p class="text-xs text-muted" style="margin-bottom:var(--sp-4);">Vote for today's outstanding Blaugrana performer:</p>
+
+            <form id="motm-poll-form" class="poll-options" role="radiogroup" aria-labelledby="motm-title">
+              <div class="poll-option" data-player="lamine">
+                <div class="poll-bar" style="width: 58%;"></div>
+                <input type="radio" name="motm" id="poll-lamine" value="lamine" checked />
+                <label for="poll-lamine">
+                  <span>🌟 Lamine Yamal (Goal, 7 Dribbles)</span>
+                  <span class="poll-pct" id="pct-lamine">58%</span>
+                </label>
+              </div>
+
+              <div class="poll-option" data-player="pedri">
+                <div class="poll-bar" style="width: 24%;"></div>
+                <input type="radio" name="motm" id="poll-pedri" value="pedri" />
+                <label for="poll-pedri">
+                  <span>⚡ Pedri (Assist, 94% Pass Acc.)</span>
+                  <span class="poll-pct" id="pct-pedri">24%</span>
+                </label>
+              </div>
+
+              <div class="poll-option" data-player="lewy">
+                <div class="poll-bar" style="width: 12%;"></div>
+                <input type="radio" name="motm" id="poll-lewy" value="lewy" />
+                <label for="poll-lewy">
+                  <span>🎯 Robert Lewandowski (Goal)</span>
+                  <span class="poll-pct" id="pct-lewy">12%</span>
+                </label>
+              </div>
+
+              <div class="poll-option" data-player="cubarsi">
+                <div class="poll-bar" style="width: 6%;"></div>
+                <input type="radio" name="motm" id="poll-cubarsi" value="cubarsi" />
+                <label for="poll-cubarsi">
+                  <span>🛡️ Pau Cubarsí (6 Tackles, 0 Fouls)</span>
+                  <span class="poll-pct" id="pct-cubarsi">6%</span>
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--sm" style="margin-top:var(--sp-2);" id="poll-submit-btn">
+                Cast Your Vote
+              </button>
+            </form>
+          </article>
+        </section>
+
+        <!-- Column 3: Live Chat (Members Only) -->
+        <section aria-labelledby="chat-heading">
+          <h2 class="heading-2" id="chat-heading" style="margin-bottom:var(--sp-4);">Live Match Chat</h2>
+
+          <div class="live-chat" id="match-live-chat" aria-label="Real-time fan discussion">
+            <!-- Header -->
+            <div class="live-chat__header">
+              <span class="badge badge--live">LIVE</span>
+              <span class="live-chat__title">Camp Nou Terrace</span>
+              <span class="text-xs text-muted" style="margin-left:auto;">Members Only</span>
+            </div>
+
+            <!-- Messages list -->
+            <div class="live-chat__messages" id="chat-messages" role="log" aria-live="polite" aria-atomic="false">
+              <!-- Dynamically populated -->
+            </div>
+
+            <!-- Footer: Chat Input or Lock Overlay -->
+            <div id="chat-unlocked-footer" class="live-chat__footer">
+              <form id="chat-form" style="display:flex;gap:var(--sp-2);width:100%;">
+                <label for="chat-input" class="visually-hidden">Send chat message</label>
+                <input type="text" id="chat-input" placeholder="Type a message to fellow Culers..." maxlength="200" required />
+                <button type="submit" class="btn btn--primary btn--sm">Send</button>
+              </form>
+            </div>
+
+            <div id="chat-locked-overlay" class="lock-overlay" style="display:none;">
+              <span class="lock-overlay__icon" aria-hidden="true">🔒</span>
+              <h3 class="lock-overlay__title">Members Live Chat</h3>
+              <p class="text-xs" style="color:rgba(255,255,255,0.85);margin-bottom:var(--sp-3);">
+                Live match chat is reserved for registered Members &amp; Supporters.
+              </p>
+              <a href="membership.html" class="btn btn--gold btn--sm">Upgrade to Join Chat</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">Blaugrana <span>Hub</span></div>
+          <p class="footer__tagline">The unofficial, ad-free fan community for FC Barcelona supporters worldwide.</p>
+        </div>
+        <div>
+          <p class="footer__heading">Navigation</p>
+          <ul class="footer__links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="feed.html">Community Feed</a></li>
+            <li><a href="live.html">Live Events</a></li>
+            <li><a href="squad.html">Squad</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Community</p>
+          <ul class="footer__links">
+            <li><a href="history.html">Club History</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="profile.html">Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Disclaimer</p>
+          <p class="text-xs text-muted" style="line-height:1.5;">This match room simulation is for fan entertainment. No live video broadcasts are hosted.</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__disclaimer">⚠️ Unofficial Fan Project — Not affiliated with FC Barcelona</p>
+        <p>© 2026 Blaugrana Hub. Ad-free fan community.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/match-room.js"></script>
+</body>
+</html>
