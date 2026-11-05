@@ -1,12 +1,8 @@
-/**
- * match-room.js — Live match room logic: MOTM poll and simulated live chat
- */
 import { Storage } from './storage.js';
-import { getSession, isMember, updateNavUI } from './auth.js';
+import { getSession, isLoggedIn, isMember, updateNavUI } from './auth.js';
 import { initTheme, toggleTheme } from './theme.js';
 import { initNav, showToast, seedIfNeeded } from './ui.js';
 
-// Simulated default chat stream
 const INITIAL_CHAT = [
   { id: 'm1', author: 'CulerMarc', text: 'WHAT A GOAL FROM LAMINE! Golazo absoluto!', time: '71\'', own: false },
   { id: 'm2', author: 'BarcaTactics', text: 'Pedri’s vision to spot that run was pure masterclass.', time: '72\'', own: false },
@@ -63,6 +59,10 @@ function initMOTMPoll() {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (!isLoggedIn()) {
+      showToast('Authorization required: Please sign in to vote in MOTM polls.', 'warning');
+      return;
+    }
     if (hasVoted) {
       showToast('You have already voted in this match poll.', 'info');
       return;
@@ -91,60 +91,98 @@ function initLiveChat() {
   const unlockedFooter = document.getElementById('chat-unlocked-footer');
   const lockedOverlay = document.getElementById('chat-locked-overlay');
 
-  const userIsMember = isMember();
+  const userIsLoggedIn = isLoggedIn();
   const session = getSession();
 
-  if (!userIsMember) {
-    if (lockedOverlay) lockedOverlay.style.display = 'flex';
+  if (!userIsLoggedIn) {
+    if (lockedOverlay) {
+      lockedOverlay.style.display = 'flex';
+      lockedOverlay.innerHTML = `
+        <span class="lock-overlay__icon" aria-hidden="true">🔒</span>
+        <h3 class="lock-overlay__title">Authorization Required</h3>
+        <p class="text-xs" style="color:rgba(255,255,255,0.85);margin-bottom:var(--sp-3);">
+          Please sign in to participate in the live terrace match chat.
+        </p>
+        <a href="auth.html" class="btn btn--gold btn--sm">Sign In to Join Chat</a>
+      `;
+    }
     if (unlockedFooter) unlockedFooter.style.display = 'none';
   } else {
     if (lockedOverlay) lockedOverlay.style.display = 'none';
     if (unlockedFooter) unlockedFooter.style.display = 'flex';
   }
 
-  let chatHistory = Storage.get('match_chat') || INITIAL_CHAT;
+  let chatHistory = Storage.get('match_chat');
+  if (!chatHistory || !Array.isArray(chatHistory) || chatHistory.length === 0) {
+    chatHistory = [...INITIAL_CHAT];
+    Storage.set('match_chat', chatHistory);
+  }
 
   function renderMessages() {
     if (!container) return;
-    container.innerHTML = chatHistory.map(msg => `
-      <div class="chat-msg ${msg.own ? 'chat-msg--own' : ''}">
-        <div class="chat-msg__bubble">
-          <div class="chat-msg__author">${escapeHTML(msg.author)} ${msg.time ? `· <span class="text-xs font-normal">${msg.time}</span>` : ''}</div>
-          <div class="chat-msg__text">${escapeHTML(msg.text)}</div>
+    container.innerHTML = chatHistory.map(msg => {
+      const isMyMsg = session && (msg.userId === session.userId || msg.author === session.username);
+      const deleteMsgBtn = isMyMsg
+        ? `<button type="button" class="post-card__delete" data-del-chat="${msg.id}" style="font-size:10px;padding:1px 4px;margin-left:4px;" title="Delete message">✕</button>`
+        : '';
+
+      return `
+        <div class="chat-msg ${isMyMsg ? 'chat-msg--own' : ''}">
+          <div class="chat-msg__bubble">
+            <div class="chat-msg__author" style="display:flex;align-items:center;justify-content:space-between;">
+              <span>${escapeHTML(msg.author)} ${msg.time ? `· <span class="text-xs font-normal">${msg.time}</span>` : ''}</span>
+              ${deleteMsgBtn}
+            </div>
+            <div class="chat-msg__text">${escapeHTML(msg.text)}</div>
+          </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
+
     container.scrollTop = container.scrollHeight;
+
+    container.querySelectorAll('[data-del-chat]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.delChat;
+        chatHistory = chatHistory.filter(m => m.id !== id);
+        Storage.set('match_chat', chatHistory);
+        renderMessages();
+      });
+    });
   }
 
   renderMessages();
 
-  // Send message
   chatForm?.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (!isLoggedIn()) {
+      showToast('Authorization required: Please sign in to send messages.', 'warning');
+      return;
+    }
+
     const text = chatInput.value.trim();
     if (!text) return;
 
     const newMsg = {
       id: 'm' + Date.now(),
-      author: session ? session.username : 'Guest',
+      userId: session.userId,
+      author: session.username,
       text,
       time: 'Now',
       own: true
     };
 
     chatHistory.push(newMsg);
-    if (chatHistory.length > 50) chatHistory.shift();
+    if (chatHistory.length > 60) chatHistory.shift();
     Storage.set('match_chat', chatHistory);
 
     chatInput.value = '';
     renderMessages();
+    showToast('Message sent and saved to local storage.', 'info', 1500);
   });
 
-  // Simulated live match reactions every 9 seconds
   let reactionIdx = 0;
   const interval = setInterval(() => {
-    // Only simulate if document is visible
     if (document.hidden) return;
     const item = SIMULATED_REACTIONS[reactionIdx % SIMULATED_REACTIONS.length];
     reactionIdx++;
@@ -153,15 +191,15 @@ function initLiveChat() {
       id: 'm' + Date.now(),
       author: item.author,
       text: item.text,
-      time: '75\'',
+      time: '76\'',
       own: false
     };
 
     chatHistory.push(simMsg);
-    if (chatHistory.length > 50) chatHistory.shift();
+    if (chatHistory.length > 60) chatHistory.shift();
     Storage.set('match_chat', chatHistory);
     renderMessages();
-  }, 9000);
+  }, 10000);
 
   window.addEventListener('beforeunload', () => clearInterval(interval));
 }
