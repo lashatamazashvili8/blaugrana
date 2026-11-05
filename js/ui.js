@@ -302,21 +302,29 @@ export function formatRelative(iso) {
 /* ── Seed check ── */
 export async function seedIfNeeded() {
   const { Storage } = await import('./storage.js');
-  if (Storage.get('seeded')) return;
+  const hasUsers = (Storage.get('users') || []).length > 0;
+  const hasFixtures = (Storage.get('fixtures') || []).length > 0;
+  if (Storage.get('seeded') && hasUsers && hasFixtures) return;
 
   const files = ['users', 'posts', 'comments', 'fixtures', 'players', 'trophies', 'events'];
   const base  = findBase();
 
+  let loadedCount = 0;
   await Promise.all(files.map(async f => {
     try {
       const res  = await fetch(`${base}/js/data/${f}.json`);
-      const data = await res.json();
-      Storage.set(f, data);
+      if (res.ok) {
+        const data = await res.json();
+        Storage.set(f, data);
+        loadedCount++;
+      }
     } catch (e) {
       console.warn('[seed] Could not load', f, e);
     }
   }));
-  Storage.set('seeded', true);
+  if (loadedCount > 0) {
+    Storage.set('seeded', true);
+  }
 }
 
 function findBase() {

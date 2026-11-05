@@ -74,8 +74,53 @@ function buildFixtureCard(fixture) {
     </article>`;
 }
 
+const DEFAULT_NEXT_MATCH = {
+  homeTeam: "FC Barcelona",
+  awayTeam: "Real Madrid",
+  competition: "La Liga EA Sports",
+  date: "2026-11-29T21:00:00Z",
+  venue: "Spotify Camp Nou, Barcelona",
+  status: "upcoming"
+};
+
+const FALLBACK_FIXTURES = [
+  DEFAULT_NEXT_MATCH,
+  {
+    homeTeam: "FC Barcelona",
+    awayTeam: "Bayern Munich",
+    competition: "UEFA Champions League",
+    date: "2026-11-23T21:00:00Z",
+    venue: "Spotify Camp Nou, Barcelona",
+    status: "upcoming"
+  },
+  {
+    homeTeam: "Atletico Madrid",
+    awayTeam: "FC Barcelona",
+    homeScore: 1,
+    awayScore: 2,
+    competition: "La Liga EA Sports",
+    date: "2026-11-02T18:30:00Z",
+    venue: "Metropolitano, Madrid",
+    status: "result"
+  },
+  {
+    homeTeam: "FC Barcelona",
+    awayTeam: "Borussia Dortmund",
+    homeScore: 3,
+    awayScore: 1,
+    competition: "UEFA Champions League",
+    date: "2026-10-22T21:00:00Z",
+    venue: "Spotify Camp Nou, Barcelona",
+    status: "result"
+  }
+];
+
 function initFixturesSlider() {
-  const fixtures = Storage.get('fixtures') || [];
+  let fixtures = Storage.get('fixtures');
+  if (!fixtures || !Array.isArray(fixtures) || fixtures.length === 0) {
+    fixtures = FALLBACK_FIXTURES;
+    Storage.set('fixtures', fixtures);
+  }
   const track    = document.getElementById('fixtures-track');
   const dotsEl   = document.getElementById('slider-dots');
   const prevBtn  = document.getElementById('slider-prev');
@@ -204,8 +249,7 @@ function initPostsPreview() {
 /* ── Next match hero info ── */
 function initHeroMatch() {
   const fixtures = Storage.get('fixtures') || [];
-  const next = fixtures.find(f => f.status === 'upcoming');
-  if (!next) return;
+  const next = fixtures.find(f => f.status === 'upcoming') || DEFAULT_NEXT_MATCH;
 
   const homeEl  = document.getElementById('hero-home');
   const awayEl  = document.getElementById('hero-away');
