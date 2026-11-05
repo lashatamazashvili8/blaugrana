@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blaugrana Hub Membership Tiers — Join our ad-free fan community. Unlock live match rooms, exclusive podcasts, and supporter perks." />
+  <title>Membership Tiers & Perks — Blaugrana Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/pages/membership.css" />
+
+  <style>
+    #nav-user { display: none; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="container navbar__inner">
+        <a href="../index.html" class="navbar__brand" aria-label="Blaugrana Hub home">
+          <svg class="navbar__brand-icon" viewBox="0 0 36 36" aria-hidden="true" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#A50044" stroke="#EDBB00" stroke-width="2"/>
+            <path d="M18 4 C11 4 6 10 6 18 C6 26 11 32 18 32 C25 32 30 26 30 18 C30 10 25 4 18 4Z" fill="#004D98"/>
+            <path d="M18 4 L18 32" stroke="#EDBB00" stroke-width="2"/>
+            <path d="M6 18 L30 18" stroke="#EDBB00" stroke-width="1" stroke-opacity="0.5"/>
+            <text x="18" y="22" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="10">BH</text>
+          </svg>
+          Blaugrana <span>Hub</span>
+        </a>
+
+        <ul class="navbar__nav" role="list">
+          <li><a href="../index.html" class="navbar__link">Home</a></li>
+          <li><a href="feed.html" class="navbar__link">Community</a></li>
+          <li><a href="live.html" class="navbar__link">Live</a></li>
+          <li><a href="squad.html" class="navbar__link">Squad</a></li>
+          <li><a href="history.html" class="navbar__link">History</a></li>
+          <li><a href="membership.html" class="navbar__link navbar__link--cta is-active">Join</a></li>
+        </ul>
+
+        <div class="navbar__actions">
+          <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+
+          <button class="navbar__user" id="nav-user" aria-label="User menu" popovertarget="user-dropdown">
+            <span class="navbar__user-avatar" id="nav-user-avatar" aria-hidden="true">CD</span>
+            <span id="nav-user-label">culerdemo</span>
+          </button>
+          <div id="user-dropdown" popover style="position:fixed;top:68px;right:16px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);padding:var(--sp-2);min-width:160px;z-index:var(--z-nav);">
+            <a href="profile.html" style="display:block;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);">My Profile</a>
+            <a href="membership.html" style="display:block;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);">Membership</a>
+            <hr style="border:none;border-top:1px solid var(--color-border);margin:var(--sp-2) 0;">
+            <button id="nav-logout" style="display:block;width:100%;text-align:left;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);color:var(--color-garnet);">Log out</button>
+          </div>
+
+          <a href="auth.html" class="btn btn--outline-light btn--sm" id="nav-login">Sign In</a>
+
+          <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation menu">
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="../index.html" class="mobile-nav__link">🏠 Home</a>
+      <a href="feed.html" class="mobile-nav__link">💬 Community</a>
+      <a href="live.html" class="mobile-nav__link">📡 Live</a>
+      <a href="squad.html" class="mobile-nav__link">👥 Squad</a>
+      <a href="history.html" class="mobile-nav__link">📜 History</a>
+      <div class="mobile-nav__sep" aria-hidden="true"></div>
+      <a href="membership.html" class="mobile-nav__link is-active">⭐ Join / Upgrade</a>
+      <a href="auth.html" class="mobile-nav__link" id="mobile-login">🔑 Sign In</a>
+    </nav>
+    <div class="overlay" id="nav-overlay" aria-hidden="true"></div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="page-main section-sm">
+    <div class="container">
+      <!-- Page Header -->
+      <div class="section-header text-center" style="max-width:680px;margin-inline:auto;display:block;">
+        <span class="section-header__eyebrow">Community Pass</span>
+        <h1 class="display-2" style="margin-bottom:var(--sp-3);">Choose Your Blaugrana Tier</h1>
+        <p class="text-muted" style="line-height:1.6;">
+          Join thousands of Culers worldwide. Unofficial, ad-free forever. Mock upgrade flow for testing and demonstration.
+        </p>
+      </div>
+
+      <!-- Current Tier Banner (if logged in) -->
+      <div id="current-tier-banner" style="display:none;margin-bottom:var(--sp-8);padding:var(--sp-4) var(--sp-6);background:rgba(0,77,152,0.08);border:1px solid var(--color-navy);border-radius:var(--radius-card);text-align:center;">
+        <p class="text-sm">You are currently signed in as a <strong id="active-tier-name" style="text-transform:uppercase;color:var(--color-navy);">Free Fan</strong>. You can switch tiers below anytime!</p>
+      </div>
+
+      <!-- Pricing Grid -->
+      <section class="pricing-grid" aria-label="Membership pricing options" style="margin-bottom:var(--sp-16);">
+        <!-- Free Tier -->
+        <article class="pricing-card" id="card-tier-free">
+          <h2 class="heading-2">Free Culer</h2>
+          <p class="text-sm text-muted">Essential match schedules, club history, and public community viewing.</p>
+
+          <div class="pricing-card__price">
+            <span class="pricing-card__currency">$</span>
+            <span class="pricing-card__amount">0</span>
+            <span class="pricing-card__period">/ forever</span>
+          </div>
+
+          <ul class="pricing-card__features" role="list">
+            <li class="pricing-card__feature pricing-card__feature--yes">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span>Read community discussions</span>
+            </li>
+            <li class="pricing-card__feature pricing-card__feature--yes">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span>Access match schedules &amp; squad stats</span>
+            </li>
+            <li class="pricing-card__feature pricing-card__feature--yes">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span>100% Ad-Free Experience</span>
+            </li>
+            <li class="pricing-card__feature pricing-card__feature--no">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              <span>Post and comment in feed</span>
+            </li>
+            <li class="pricing-card__feature pricing-card__feature--no">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              <span>Live match chat &amp; MOTM polls</span>
+            </li>
+          </ul>
+
+          <button type="button" class="btn btn--outline btn--full" data-upgrade-target="free">
+            Select Free
+          </button>
+        </article>
+
+        <!-- Member Tier (Featured) -->
+        <article class="pricing-card pricing-card--featured" id="card-tier-member">
+          <span class="badge badge--gold pricing-card__badge">Most Popular</span>
+          <h2 class="heading-2">Soci Member</h2>
+          <p class="text-sm text-muted">Full community participation, live match room chat, and MOTM voting.</p>
+
+          <div class="pricing-card__price">
+            <span class="pricing-card__currency">$</span>
+            <span class="pricing-card__amount">4.99</span>
+            <span class="pricing-card__period">/ month (mock)</span>
+          </div>
+
+          <ul class="pricing-card__features" role="list">
+            <li class="pricing-card__feature pricing-card__feature--yes">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span>Create posts, share images &amp; comment</span>
+            </li>
+            <li class="pricing-card__feature pricing-card__feature--yes">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span>Live Match Room Terrace Chat</span>
+            </li>
+            <li class="pricing-card__feature pricing-card__feature--yes">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span>Vote in Man of the Match polls</span>
+            </li>
+            <li class="pricing-card__feature pricing-card__feature--yes">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span>Verified "Member" profile badge</span>
+            </li>
+            <li class="pricing-card__feature pricing-card__feature--no">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              <span>Exclusive tactical breakdown webinars</span>
+            </li>
+          </ul>
+
+          <button type="button" class="btn btn--primary btn--full" data-upgrade-target="member">
+            Upgrade to Member
+          </button>
+        </article>
+
+        <!-- Supporter Tier -->
+        <article class="pricing-card" id="card-tier-supporter">
+          <h2 class="heading-2">Gold Supporter</h2>
+          <p class="text-sm text-muted">For passionate Culers who want to support independent, ad-free fan media.</p>
+
+          <div class="pricing-card__price">
+            <span class="pricing-card__currency">$</span>
+            <span class="pricing-card__amount">9.99</span>
+            <span class="pricing-card__period">/ month (mock)</span>
+          </div>
+
+          <ul class="pricing-card__features" role="list">
+            <li class="pricing-card__feature pricing-card__feature--yes">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span>Everything in Member tier</span>
+            </li>
+            <li class="pricing-card__feature pricing-card__feature--yes">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span>Exclusive tactical webinars &amp; podcasts</span>
+            </li>
+            <li class="pricing-card__feature pricing-card__feature--yes">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span>Gold Supporter Badge in comments &amp; profile</span>
+            </li>
+            <li class="pricing-card__feature pricing-card__feature--yes">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span>Priority feature requests for Blaugrana Hub</span>
+            </li>
+          </ul>
+
+          <button type="button" class="btn btn--gold btn--full" data-upgrade-target="supporter">
+            Become a Gold Supporter
+          </button>
+        </article>
+      </section>
+
+      <!-- Feature Comparison Table -->
+      <section class="section-sm" aria-labelledby="comparison-heading">
+        <h2 class="heading-2" id="comparison-heading" style="margin-bottom:var(--sp-4);">Feature Comparison</h2>
+        <div class="compare-wrapper">
+          <table class="compare-table">
+            <caption class="visually-hidden">Comparison of membership tier features and permissions</caption>
+            <thead>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col">Free</th>
+                <th scope="col">Member</th>
+                <th scope="col">Supporter</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Ad-Free (No ads, ever)</th>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <th scope="row">Fixtures, Squad &amp; Trophies</th>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <th scope="row">Publish Posts &amp; Comment</th>
+                <td class="cross">✕</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <th scope="row">Live Match Room Terrace Chat</th>
+                <td class="cross">✕</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <th scope="row">Vote in MOTM Polls</th>
+                <td class="cross">✕</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <th scope="row">Exclusive Podcasts &amp; Watch Parties</th>
+                <td class="cross">✕</td>
+                <td class="cross">✕</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <th scope="row">Gold Community Profile Badge</th>
+                <td class="cross">✕</td>
+                <td class="cross">✕</td>
+                <td class="check">✓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- FAQ Accordion -->
+      <section class="section-sm" aria-labelledby="faq-heading" style="max-width:800px;margin-inline:auto;">
+        <h2 class="heading-2 text-center" id="faq-heading" style="margin-bottom:var(--sp-6);">Frequently Asked Questions</h2>
+        <div class="accordion" id="faq-accordion">
+          <div class="accordion-item">
+            <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-ans-1">
+              <span>Is this an official FC Barcelona membership?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-panel" id="faq-ans-1">
+              <div class="accordion-panel__inner">
+                No. Blaugrana Hub is strictly an unofficial, non-commercial fan community created by supporters for supporters. We are not affiliated with or endorsed by FC Barcelona.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-ans-2">
+              <span>Is real money charged for upgrading?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-panel" id="faq-ans-2">
+              <div class="accordion-panel__inner">
+                No real payments are ever processed! This project features a simulated mock upgrade flow using browser local storage, designed to demonstrate client-side state management and route gating.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-ans-3">
+              <span>Why are there no ads on the site?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-panel" id="faq-ans-3">
+              <div class="accordion-panel__inner">
+                Modern football websites are overcrowded with popups, banners, and auto-playing ads. Blaugrana Hub was built as a clean, distraction-free sanctuary for authentic football discussion.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-ans-4">
+              <span>Can I cancel or switch tiers anytime?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-panel" id="faq-ans-4">
+              <div class="accordion-panel__inner">
+                Yes! You can switch between Free, Member, and Supporter tiers whenever you want with a single click in this demo.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Upgrade Modal Dialog -->
+  <div class="modal" id="upgrade-modal" role="dialog" aria-modal="true" aria-labelledby="upgrade-modal-title" aria-hidden="true">
+    <div class="modal__backdrop"></div>
+    <div class="modal__box">
+      <div class="modal__header">
+        <h3 class="modal__title" id="upgrade-modal-title">Confirm Tier Upgrade</h3>
+        <button type="button" class="modal__close" data-modal-close aria-label="Close upgrade modal">✕</button>
+      </div>
+      <div class="modal__body" id="upgrade-modal-body">
+        <div class="upgrade-steps">
+          <div class="upgrade-step is-done">
+            <div class="upgrade-step__num">1</div>
+            <div>
+              <p class="font-semi">Selected Tier: <strong id="modal-selected-tier">Member</strong></p>
+              <p class="text-xs text-muted">Unlocks live match chat, posting, and voting.</p>
+            </div>
+          </div>
+          <div class="upgrade-step">
+            <div class="upgrade-step__num">2</div>
+            <div>
+              <p class="font-semi">Mock Payment Simulation</p>
+              <p class="text-xs text-muted">No real card required. Click confirm to instantly apply the membership status to your session.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn btn--ghost btn--sm" data-modal-close>Cancel</button>
+        <button type="button" class="btn btn--gold btn--sm" id="confirm-upgrade-btn">Confirm &amp; Activate Tier</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">Blaugrana <span>Hub</span></div>
+          <p class="footer__tagline">The unofficial, ad-free fan community for FC Barcelona supporters worldwide.</p>
+        </div>
+        <div>
+          <p class="footer__heading">Navigation</p>
+          <ul class="footer__links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="feed.html">Community Feed</a></li>
+            <li><a href="live.html">Live Events</a></li>
+            <li><a href="squad.html">Squad</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Community</p>
+          <ul class="footer__links">
+            <li><a href="history.html">Club History</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="profile.html">Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Notice</p>
+          <p class="text-xs text-muted" style="line-height:1.5;">Mock upgrade demonstration for academic evaluation.</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__disclaimer">⚠️ Unofficial Fan Project — Not affiliated with FC Barcelona</p>
+        <p>© 2026 Blaugrana Hub. Ad-free fan community.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/membership.js"></script>
+</body>
+</html>
