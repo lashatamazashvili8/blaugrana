@@ -1,10 +1,14 @@
-/**
- * profile.js — User profile controller: statistics, user posts, user comments, saved posts, and profile editing
- */
+import { z } from './vendor/zod.js';
+import { createFormik } from './vendor/formik.js';
 import { Storage } from './storage.js';
 import { getSession, isLoggedIn, updateNavUI } from './auth.js';
 import { initTheme, toggleTheme } from './theme.js';
 import { initNav, initTabs, initModals, openModal, closeModal, showToast, formatRelative, seedIfNeeded } from './ui.js';
+
+const profileSchema = z.object({
+  bio: z.string().max(250, 'Bio cannot exceed 250 characters.'),
+  favoritePlayer: z.string().max(50, 'Player name is too long.')
+});
 
 function renderProfile() {
   const session = getSession();
@@ -28,7 +32,6 @@ function renderProfile() {
     return;
   }
 
-  // Find user record in storage
   const users = Storage.get('users') || [];
   const user = users.find(u => u.id === session.userId || u.username === session.username) || {
     ...session,
@@ -36,7 +39,6 @@ function renderProfile() {
     favoritePlayer: session.favoritePlayer || 'Lamine Yamal'
   };
 
-  // Header Elements
   document.getElementById('prof-avatar').textContent = user.avatarInitials || user.username.slice(0, 2).toUpperCase();
   document.getElementById('prof-tier-badge').textContent = (user.tier || 'free').toUpperCase();
   document.getElementById('prof-display-name').textContent = user.displayName || user.username;
@@ -47,7 +49,6 @@ function renderProfile() {
   const memberDate = user.memberSince ? new Date(user.memberSince).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }) : 'Nov 2026';
   document.getElementById('prof-since').textContent = memberDate;
 
-  // Datasets
   const allPosts = Storage.get('posts') || [];
   const allComments = Storage.get('comments') || [];
 
@@ -55,18 +56,15 @@ function renderProfile() {
   const myComments = allComments.filter(c => c.userId === session.userId || c.username === session.username);
   const mySaved = allPosts.filter(p => p.likes?.includes(session.userId));
 
-  // Sidebar Stats
   document.getElementById('stat-posts-count').textContent = myPosts.length;
   document.getElementById('stat-comments-count').textContent = myComments.length;
   document.getElementById('stat-likes-count').textContent = mySaved.length;
   document.getElementById('stat-tier-badge').textContent = (user.tier || 'free').toUpperCase();
 
-  // Tab counters
   document.getElementById('tab-posts-count').textContent = myPosts.length;
   document.getElementById('tab-comments-count').textContent = myComments.length;
   document.getElementById('tab-saved-count').textContent = mySaved.length;
 
-  // Render My Posts Panel
   const postsList = document.getElementById('user-posts-list');
   if (myPosts.length === 0) {
     postsList.innerHTML = `
@@ -101,7 +99,6 @@ function renderProfile() {
     });
   }
 
-  // Render My Comments Panel
   const commentsList = document.getElementById('user-comments-list');
   if (myComments.length === 0) {
     commentsList.innerHTML = `
@@ -111,19 +108,29 @@ function renderProfile() {
       </div>`;
   } else {
     commentsList.innerHTML = myComments.map(c => `
-      <div class="comment" style="background:var(--color-bg);padding:var(--sp-3) var(--sp-4);border-radius:var(--radius-md);border:1px solid var(--color-border);">
-        <div style="width:100%;">
+      <div class="comment" style="background:var(--color-bg);padding:var(--sp-3) var(--sp-4);border-radius:var(--radius-md);border:1px solid var(--color-border);display:flex;justify-content:space-between;align-items:flex-start;">
+        <div style="flex:1;">
           <div style="display:flex;justify-content:space-between;font-size:var(--fs-xs);margin-bottom:4px;">
             <strong>Comment on Discussion</strong>
             <span class="text-muted">${formatRelative(c.timestamp)}</span>
           </div>
           <p class="text-sm">${escapeHTML(c.text)}</p>
         </div>
+        <button type="button" class="post-card__delete" data-del-comment-line="${c.id}" style="margin-left:var(--sp-3);font-size:11px;" title="Delete this line of comment">✕ Delete</button>
       </div>
     `).join('');
+
+    commentsList.querySelectorAll('[data-del-comment-line]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (confirm('Delete this line of comment?')) {
+          Storage.removeFrom('comments', btn.dataset.delCommentLine);
+          showToast('Comment deleted', 'info');
+          renderProfile();
+        }
+      });
+    });
   }
 
-  // Render Liked Posts Panel
   const savedList = document.getElementById('user-saved-list');
   if (mySaved.length === 0) {
     savedList.innerHTML = `
@@ -143,35 +150,54 @@ function renderProfile() {
     `).join('');
   }
 
-  // Setup Edit Profile Modal
   const editBtn = document.getElementById('edit-profile-btn');
   const editBioInput = document.getElementById('edit-bio');
   const editFavInput = document.getElementById('edit-fav-player');
   const editForm = document.getElementById('edit-profile-form');
 
+  const profileFormik = createFormik({
+    initialValues: {
+      bio: user.bio || '',
+      favoritePlayer: user.favoritePlayer || ''
+    },
+    validationSchema: profileSchema,
+    onSubmit: async (values) => {
+      const updatedBio = values.bio.trim();
+      const updatedFav = values.favoritePlayer.trim();
+
+      Storage.updateIn('users', session.userId, {
+        bio: updatedBio,
+        favoritePlayer: updatedFav
+      });
+
+      session.bio = updatedBio;
+      session.favoritePlayer = updatedFav;
+      Storage.set('session', session);
+
+      closeModal('edit-profile-modal');
+      showToast('Profile updated and saved!', 'success');
+      renderProfile();
+    }
+  });
+
   editBtn?.addEventListener('click', () => {
-    if (editBioInput) editBioInput.value = user.bio || '';
-    if (editFavInput) editFavInput.value = user.favoritePlayer || '';
+    if (editBioInput) {
+      editBioInput.value = user.bio || '';
+      profileFormik.setFieldValue('bio', user.bio || '');
+    }
+    if (editFavInput) {
+      editFavInput.value = user.favoritePlayer || '';
+      profileFormik.setFieldValue('favoritePlayer', user.favoritePlayer || '');
+    }
     openModal('edit-profile-modal');
   });
 
+  editBioInput?.addEventListener('input', (e) => profileFormik.handleChange(e));
+  editFavInput?.addEventListener('input', (e) => profileFormik.handleChange(e));
+
   editForm?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const updatedBio = editBioInput.value.trim();
-    const updatedFav = editFavInput.value.trim();
-
-    Storage.updateIn('users', session.userId, {
-      bio: updatedBio,
-      favoritePlayer: updatedFav
-    });
-
-    session.bio = updatedBio;
-    session.favoritePlayer = updatedFav;
-    Storage.set('session', session);
-
-    closeModal('edit-profile-modal');
-    showToast('Profile updated successfully!', 'success');
-    renderProfile();
+    profileFormik.handleSubmit(e);
   });
 }
 
