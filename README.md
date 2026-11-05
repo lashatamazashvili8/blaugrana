@@ -10,8 +10,8 @@
 
 ### Key Philosophy
 - **100% Ad-Free**: Pure football culture without intrusive banners, trackers, or commercial clutter.
-- **Standards-Driven**: Native ES modules, CSS Custom Properties, and Semantic HTML.
-- **Resilient Mock Architecture**: Client-side localStorage persistence layer mimicking authentic authentication, tier gating, and real-time community engagement.
+- **Standards-Driven & Enterprise Architecture**: Native ES modules, Formik form state management, Zod schema validation, and Web Crypto SHA-256 password hashing.
+- **Resilient Mock Architecture**: Client-side localStorage persistence layer storing community posts, comments, likes, and live match terrace messages, complete with role-based authorization guards.
 
 ---
 
@@ -54,12 +54,13 @@
 
 ---
 
-## 🔒 Mock Authentication & Security Disclaimer
+## 🔒 Authentication & Cryptographic Hashing
 
-> ⚠️ **SECURITY DISCLAIMER (Academic / Mock Prototype Only)**:
-> - Passwords and user records are stored as unencrypted client-side objects in browser `localStorage`.
-> - **DO NOT** enter real-world, sensitive passwords on this site.
-> - This mock authentication system is strictly designed to showcase client-side state handling, role-based access control (RBAC), and route guarding in a static frontend environment.
+> 🛡️ **Client-Side SHA-256 Password Hashing**:
+> - All user passwords are cryptographically hashed using the standard **Web Crypto API** (`crypto.subtle.digest('SHA-256', ...)`) with a unique salt (`:blaugrana_salt_2026`) prior to storage in browser `localStorage`.
+> - Raw passwords are never retained in local storage.
+> - Forms are validated with **Formik** and strict **Zod** schemas before dispatching actions.
+> - Authorisation is strictly enforced for publishing community posts, writing comments, and participating in live terrace chat.
 
 ### Default Test Accounts
 For quick testing and grading, you can click the quick-fill buttons on `pages/auth.html` or use:
