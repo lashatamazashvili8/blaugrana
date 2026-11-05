@@ -89,28 +89,13 @@ function initLiveChat() {
   const chatForm = document.getElementById('chat-form');
   const chatInput = document.getElementById('chat-input');
   const unlockedFooter = document.getElementById('chat-unlocked-footer');
-  const lockedOverlay = document.getElementById('chat-locked-overlay');
+  const lockedFooter = document.getElementById('chat-locked-footer');
 
   const userIsLoggedIn = isLoggedIn();
   const session = getSession();
 
-  if (!userIsLoggedIn) {
-    if (lockedOverlay) {
-      lockedOverlay.style.display = 'flex';
-      lockedOverlay.innerHTML = `
-        <span class="lock-overlay__icon" aria-hidden="true">🔒</span>
-        <h3 class="lock-overlay__title">Authorization Required</h3>
-        <p class="text-xs" style="color:rgba(255,255,255,0.85);margin-bottom:var(--sp-3);">
-          Please sign in to participate in the live terrace match chat.
-        </p>
-        <a href="auth.html" class="btn btn--gold btn--sm">Sign In to Join Chat</a>
-      `;
-    }
-    if (unlockedFooter) unlockedFooter.style.display = 'none';
-  } else {
-    if (lockedOverlay) lockedOverlay.style.display = 'none';
-    if (unlockedFooter) unlockedFooter.style.display = 'flex';
-  }
+  if (unlockedFooter) unlockedFooter.hidden = !userIsLoggedIn;
+  if (lockedFooter) lockedFooter.hidden = userIsLoggedIn;
 
   let chatHistory = Storage.get('match_chat');
   if (!chatHistory || !Array.isArray(chatHistory) || chatHistory.length === 0) {
@@ -151,6 +136,22 @@ function initLiveChat() {
     });
   }
 
+  
+  
+  const syncMessages = (event) => {
+    if (event.key !== 'bh_match_chat') return;
+    try {
+      const latest = event.newValue ? JSON.parse(event.newValue) : [];
+      if (Array.isArray(latest)) {
+        chatHistory = latest;
+        renderMessages();
+      }
+    } catch {
+      
+    }
+  };
+  window.addEventListener('storage', syncMessages);
+
   renderMessages();
 
   chatForm?.addEventListener('submit', (e) => {
@@ -184,6 +185,10 @@ function initLiveChat() {
   let reactionIdx = 0;
   const interval = setInterval(() => {
     if (document.hidden) return;
+    
+    
+    const latest = Storage.get('match_chat');
+    if (Array.isArray(latest)) chatHistory = latest;
     const item = SIMULATED_REACTIONS[reactionIdx % SIMULATED_REACTIONS.length];
     reactionIdx++;
 
@@ -201,7 +206,10 @@ function initLiveChat() {
     renderMessages();
   }, 10000);
 
-  window.addEventListener('beforeunload', () => clearInterval(interval));
+  window.addEventListener('beforeunload', () => {
+    clearInterval(interval);
+    window.removeEventListener('storage', syncMessages);
+  });
 }
 
 function escapeHTML(str) {

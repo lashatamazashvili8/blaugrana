@@ -1,6 +1,4 @@
-/**
- * membership.js — Interactive membership selection, FAQ accordion, and mock upgrade modal flow
- */
+
 import { getSession, isLoggedIn, upgradeTier, updateNavUI } from './auth.js';
 import { initTheme, toggleTheme } from './theme.js';
 import { initNav, initAccordion, openModal, closeModal, initModals, showToast, seedIfNeeded } from './ui.js';
@@ -10,7 +8,7 @@ let pendingTier = 'member';
 function initTierButtons() {
   const session = getSession();
 
-  // If logged in, display active banner and highlight card
+  
   if (session) {
     const banner = document.getElementById('current-tier-banner');
     const tierName = document.getElementById('active-tier-name');
@@ -50,7 +48,7 @@ function initTierButtons() {
     });
   });
 
-  // Confirm upgrade in modal
+  
   document.getElementById('confirm-upgrade-btn')?.addEventListener('click', () => {
     const success = upgradeTier(pendingTier);
     closeModal('upgrade-modal');

@@ -1,15 +1,6 @@
-/**
- * ui.js — Shared UI utilities:
- *   - Toast notifications
- *   - Navbar hamburger + focus trap
- *   - Modal open/close
- *   - Tabs
- *   - Accordion
- *   - Lazy image loading
- *   - Scroll-triggered count-up
- */
 
-/* ── Toast ── */
+
+
 let toastContainer = null;
 
 function getToastContainer() {
@@ -30,7 +21,7 @@ export function showToast(message, type = 'info', duration = 3500) {
   toast.setAttribute('role', 'status');
   toast.innerHTML = `<span>${message}</span>`;
   container.appendChild(toast);
-  // Trigger animation
+  
   requestAnimationFrame(() => {
     requestAnimationFrame(() => toast.classList.add('is-visible'));
   });
@@ -40,7 +31,7 @@ export function showToast(message, type = 'info', duration = 3500) {
   }, duration);
 }
 
-/* ── Hamburger / Mobile nav + focus trap ── */
+
 export function initNav() {
   const hamburger  = document.getElementById('hamburger');
   const mobileNav  = document.getElementById('mobile-nav');
@@ -56,7 +47,7 @@ export function initNav() {
     mobileNav.classList.add('is-open');
     overlay?.classList.add('is-active');
     document.body.style.overflow = 'hidden';
-    // Focus first item
+    
     const first = mobileNav.querySelector(focusableSelectors);
     first?.focus();
   }
@@ -73,7 +64,7 @@ export function initNav() {
   hamburger.addEventListener('click', () => isOpen ? closeNav() : openNav());
   overlay?.addEventListener('click', closeNav);
 
-  // Focus trap
+  
   mobileNav.addEventListener('keydown', e => {
     if (e.key === 'Escape') { closeNav(); return; }
     if (e.key !== 'Tab') return;
@@ -88,10 +79,10 @@ export function initNav() {
     }
   });
 
-  // Close on link click
+  
   mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
 
-  // Set active link
+  
   const path = window.location.pathname;
   document.querySelectorAll('.navbar__link, .mobile-nav__link').forEach(link => {
     if (link.getAttribute('href') && path.endsWith(link.getAttribute('href').split('/').pop())) {
@@ -100,7 +91,7 @@ export function initNav() {
   });
 }
 
-/* ── Tabs ── */
+
 export function initTabs(container = document) {
   container.querySelectorAll('[role="tablist"]').forEach(tablist => {
     const tabs   = [...tablist.querySelectorAll('[role="tab"]')];
@@ -132,13 +123,13 @@ export function initTabs(container = document) {
       }
     });
 
-    // Activate first by default
+    
     const initial = tabs.find(t => t.classList.contains('is-active')) || tabs[0];
     if (initial) activate(initial);
   });
 }
 
-// Also support simple .tab-btn / .tab-panel pattern
+
 export function initSimpleTabs(wrapper) {
   if (!wrapper) return;
   const btns   = [...wrapper.querySelectorAll('.tab-btn')];
@@ -160,7 +151,7 @@ export function initSimpleTabs(wrapper) {
   }
 }
 
-/* ── Accordion ── */
+
 export function initAccordion(container = document) {
   container.querySelectorAll('.accordion-trigger').forEach(trigger => {
     trigger.addEventListener('click', () => {
@@ -174,7 +165,7 @@ export function initAccordion(container = document) {
   });
 }
 
-/* ── Modal ── */
+
 export function openModal(modalId) {
   const modal = document.getElementById(modalId);
   if (!modal) return;
@@ -210,7 +201,7 @@ export function initModals() {
   });
 }
 
-/* ── Lazy images ── */
+
 export function initLazyImages() {
   if (!('IntersectionObserver' in window)) {
     document.querySelectorAll('img[data-src]').forEach(img => {
@@ -231,7 +222,7 @@ export function initLazyImages() {
   document.querySelectorAll('img[data-src]').forEach(img => observer.observe(img));
 }
 
-/* ── Count-up on scroll ── */
+
 export function initCountUp(selector = '[data-count]') {
   const els = document.querySelectorAll(selector);
   if (!els.length) return;
@@ -247,7 +238,7 @@ export function initCountUp(selector = '[data-count]') {
       function step(now) {
         const elapsed  = now - start;
         const progress = Math.min(elapsed / dur, 1);
-        // Ease out cubic
+        
         const eased = 1 - Math.pow(1 - progress, 3);
         el.textContent = Math.round(eased * end);
         if (progress < 1) requestAnimationFrame(step);
@@ -261,7 +252,7 @@ export function initCountUp(selector = '[data-count]') {
   els.forEach(el => observer.observe(el));
 }
 
-/* ── Debounce ── */
+
 export function debounce(fn, ms = 200) {
   let timer;
   return (...args) => {
@@ -270,7 +261,7 @@ export function debounce(fn, ms = 200) {
   };
 }
 
-/* ── Generate avatar initials SVG ── */
+
 export function avatarInitials(initials, size = 40) {
   const colors = ['#004D98', '#A50044', '#1a7a4a', '#7a5500', '#4a2d7a'];
   const color  = colors[initials.charCodeAt(0) % colors.length];
@@ -282,7 +273,7 @@ export function avatarInitials(initials, size = 40) {
   )}`;
 }
 
-/* ── Format date ── */
+
 export function formatDate(iso) {
   const d = new Date(iso);
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -299,38 +290,35 @@ export function formatRelative(iso) {
   return formatDate(iso);
 }
 
-/* ── Seed check ── */
+
 export async function seedIfNeeded() {
   const { Storage } = await import('./storage.js');
-  const hasUsers = (Storage.get('users') || []).length > 0;
-  const hasFixtures = (Storage.get('fixtures') || []).length > 0;
-  if (Storage.get('seeded') && hasUsers && hasFixtures) return;
-
+  const { SEED } = await import('./seed-fallback.js');
   const files = ['users', 'posts', 'comments', 'fixtures', 'players', 'trophies', 'events'];
-  const base  = findBase();
+  const base = findBase();
 
-  let loadedCount = 0;
-  await Promise.all(files.map(async f => {
+  await Promise.all(files.map(async (f) => {
+    const existing = Storage.get(f);
+    if (Array.isArray(existing) && existing.length > 0) return;
+
+    let data = null;
     try {
-      const res  = await fetch(`${base}/js/data/${f}.json`);
-      if (res.ok) {
-        const data = await res.json();
-        Storage.set(f, data);
-        loadedCount++;
-      }
+      const res = await fetch(`${base}/js/data/${f}.json`);
+      if (res.ok) data = await res.json();
     } catch (e) {
       console.warn('[seed] Could not load', f, e);
     }
+    if (!Array.isArray(data) || data.length === 0) data = SEED[f] || [];
+    if (data.length) Storage.set(f, data);
   }));
-  if (loadedCount > 0) {
-    Storage.set('seeded', true);
-  }
+
+  Storage.set('seeded', true);
 }
 
 function findBase() {
-  // Work out the root path regardless of which page we're on
+  
   const depth = window.location.pathname.split('/').filter(Boolean).length;
-  // If in /pages/ subdir, go up one level
+  
   if (window.location.pathname.includes('/pages/')) return '..';
   return '.';
 }

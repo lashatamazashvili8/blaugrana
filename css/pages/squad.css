@@ -1,4 +1,42 @@
-/* ── Squad Page ── */
+
+.squad-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-8);
+}
+@media (min-width: 768px) {
+  .squad-summary { grid-template-columns: repeat(4, 1fr); }
+}
+.squad-summary__card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-card);
+}
+.squad-summary__label {
+  display: block;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--sp-1);
+}
+.squad-summary__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-navy);
+  line-height: 1.15;
+}
+.squad-summary__detail {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
 .squad-controls {
   display: flex;
   flex-direction: column;
@@ -39,7 +77,7 @@
 @media (min-width: 900px) { .squad-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1200px) { .squad-grid { grid-template-columns: repeat(4, 1fr); } }
 
-/* Player Card Container */
+
 .player-card-wrap {
   perspective: 1200px;
   height: 380px;
@@ -74,7 +112,7 @@
   flex-direction: column;
 }
 
-/* Front Side */
+
 .player-card__top {
   position: relative;
   height: 190px;
@@ -176,7 +214,7 @@
   gap: var(--sp-2);
 }
 
-/* Back Side */
+
 .player-card__back {
   transform: rotateY(180deg);
   background: linear-gradient(135deg, var(--color-navy-dark), #001f4d);

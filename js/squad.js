@@ -7,8 +7,37 @@ let activePosition = 'all';
 let searchQuery = '';
 let currentSort = 'number';
 
+function renderSummary(players) {
+  const box = document.getElementById('squad-summary');
+  if (!box) return;
+
+  const goals = players.reduce((sum, p) => sum + (p.stats?.goals || 0), 0);
+  const assists = players.reduce((sum, p) => sum + (p.stats?.assists || 0), 0);
+  const cleanSheets = players
+    .filter(p => p.positionShort === 'GK')
+    .reduce((sum, p) => sum + (p.stats?.cleanSheets || 0), 0);
+  const scorers = players.filter(p => p.stats?.goals);
+  const topScorer = scorers.sort((a, b) => (b.stats.goals || 0) - (a.stats.goals || 0))[0];
+
+  const cards = [
+    { label: 'Squad', value: String(players.length || '—'), detail: 'First team · 4-3-3' },
+    { label: 'Season goals', value: String(goals), detail: topScorer ? `Top scorer: ${topScorer.name} (${topScorer.stats.goals})` : 'No goals recorded' },
+    { label: 'Assists', value: String(assists), detail: 'Combined first-team assists' },
+    { label: 'Clean sheets', value: String(cleanSheets), detail: 'Goalkeepers combined' }
+  ];
+
+  box.innerHTML = cards.map(card => `
+    <article class="squad-summary__card">
+      <span class="squad-summary__label">${card.label}</span>
+      <span class="squad-summary__value">${card.value}</span>
+      <span class="squad-summary__detail">${card.detail}</span>
+    </article>
+  `).join('');
+}
+
 function renderSquad() {
   const players = Storage.get('players') || [];
+  renderSummary(players);
   const container = document.getElementById('squad-grid-container');
   const countAll = document.getElementById('count-all');
   if (countAll) countAll.textContent = players.length;
@@ -68,7 +97,7 @@ function renderSquad() {
     return `
       <div class="player-card-wrap" id="wrap-player-${player.id}" role="listitem">
         <div class="player-card">
-          <!-- FRONT -->
+          
           <div class="player-card__front">
             <div class="player-card__top">
               <span class="player-card__badge-num">#${player.number}</span>
@@ -114,7 +143,7 @@ function renderSquad() {
             </div>
           </div>
 
-          <!-- BACK -->
+          
           <div class="player-card__back">
             <div class="player-card__back-header">
               <span class="player-card__back-title">#${player.number} ${player.name}</span>

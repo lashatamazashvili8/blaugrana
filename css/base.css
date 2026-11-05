@@ -1,8 +1,6 @@
-/* ============================================================
-   base.css — Reset, typography, global utilities
-   ============================================================ */
 
-/* ── Reset ── */
+
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
@@ -32,7 +30,7 @@ h1,h2,h3,h4,h5,h6 {
   text-transform: uppercase;
 }
 
-/* ── Skip to content ── */
+
 .skip-link {
   position: absolute;
   top: -100%;
@@ -47,22 +45,22 @@ h1,h2,h3,h4,h5,h6 {
 }
 .skip-link:focus { top: 0; }
 
-/* ── Focus visible ── */
+
 :focus-visible {
   outline: 3px solid var(--color-gold);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
 
-/* ── Selection ── */
+
 ::selection { background: var(--color-navy); color: #fff; }
 
-/* ── Scrollbar ── */
+
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }
 ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: var(--radius-pill); }
 
-/* ── Typography helpers ── */
+
 .display-1 { font-size: clamp(2.5rem, 6vw, var(--fs-4xl)); font-family: var(--font-display); font-weight: var(--fw-bold); text-transform: uppercase; line-height: var(--lh-tight); }
 .display-2 { font-size: clamp(2rem, 4vw, var(--fs-3xl)); font-family: var(--font-display); font-weight: var(--fw-bold); text-transform: uppercase; line-height: var(--lh-tight); }
 .heading-1 { font-size: clamp(1.5rem, 3vw, var(--fs-2xl)); }
@@ -72,13 +70,13 @@ h1,h2,h3,h4,h5,h6 {
 .text-xs    { font-size: var(--fs-xs); }
 .text-center { text-align: center; }
 
-/* ── Font weight helpers ── */
+
 .font-normal { font-weight: var(--fw-normal); }
 .font-medium { font-weight: var(--fw-medium); }
 .font-semi   { font-weight: var(--fw-semi); }
 .font-bold   { font-weight: var(--fw-bold); }
 
-/* ── Utility classes ── */
+
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden;
@@ -97,7 +95,7 @@ h1,h2,h3,h4,h5,h6 {
 .section-sm { padding-block: var(--sp-10); }
 .section-lg { padding-block: var(--sp-24); }
 
-/* ── Badge ── */
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -127,14 +125,14 @@ h1,h2,h3,h4,h5,h6 {
   50%      { opacity: 0.6; }
 }
 
-/* ── Divider ── */
+
 .divider {
   border: none;
   border-top: 1px solid var(--color-border);
   margin-block: var(--sp-6);
 }
 
-/* ── Overlay ── */
+
 .overlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,0.5);
@@ -145,7 +143,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 .overlay.is-active { opacity: 1; pointer-events: auto; }
 
-/* ── Toast ── */
+
 .toast-container {
   position: fixed;
   bottom: var(--sp-6);
@@ -174,10 +172,10 @@ h1,h2,h3,h4,h5,h6 {
 .toast--error   { border-color: var(--color-error); }
 .toast--warning { border-color: var(--color-warning); }
 
-/* ── Lazy image placeholder ── */
+
 img[data-src] { background: var(--color-bg-alt); min-height: 100px; }
 
-/* ── Lock overlay ── */
+
 .lock-overlay {
   position: absolute; inset: 0;
   background: rgba(0,0,0,0.65);
@@ -194,7 +192,7 @@ img[data-src] { background: var(--color-bg-alt); min-height: 100px; }
 .lock-overlay__icon { font-size: 2.5rem; }
 .lock-overlay__title { font-family: var(--font-display); font-size: var(--fs-lg); text-transform: uppercase; }
 
-/* ── Section header ── */
+
 .section-header {
   display: flex;
   align-items: flex-end;
@@ -214,7 +212,7 @@ img[data-src] { background: var(--color-bg-alt); min-height: 100px; }
 }
 .section-header__title { margin: 0; }
 
-/* ── Accent line ── */
+
 .accent-line {
   display: block;
   width: 48px; height: 4px;
@@ -223,7 +221,7 @@ img[data-src] { background: var(--color-bg-alt); min-height: 100px; }
   margin-top: var(--sp-2);
 }
 
-/* ── Animations ── */
+
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }

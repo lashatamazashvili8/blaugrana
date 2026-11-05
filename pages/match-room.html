@@ -6,12 +6,12 @@
   <meta name="description" content="Blaugrana Hub Match Room — Live match scores, timeline, lineups, MOTM poll, and live fan chat." />
   <title>El Clásico Match Room — Blaugrana Hub</title>
 
-  <!-- Fonts -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Styles -->
+  
   <link rel="stylesheet" href="../css/variables.css" />
   <link rel="stylesheet" href="../css/base.css" />
   <link rel="stylesheet" href="../css/layout.css" />
@@ -26,7 +26,7 @@
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <!-- Header -->
+  
   <header>
     <nav class="navbar" aria-label="Main navigation">
       <div class="container navbar__inner">
@@ -98,11 +98,11 @@
     <div class="overlay" id="nav-overlay" aria-hidden="true"></div>
   </header>
 
-  <!-- Live Scoreboard Header -->
+  
   <section class="match-header" aria-label="Live match scoreboard">
     <div class="container">
       <div class="match-header__teams">
-        <!-- Home Team -->
+        
         <div class="match-team">
           <div class="match-team__emblem" style="background:rgba(0,77,152,0.3);border-color:#EDBB00;">
             🔵🔴
@@ -110,7 +110,7 @@
           <span class="match-team__name">FC Barcelona</span>
         </div>
 
-        <!-- Live Score -->
+        
         <div class="match-score-box">
           <div class="badge badge--live" style="margin-bottom:var(--sp-2);">LIVE 74'</div>
           <div class="match-score" aria-label="Current score: FC Barcelona 2, Real Madrid 1">2 – 1</div>
@@ -118,7 +118,7 @@
           <p class="match-info">La Liga EA Sports · Camp Nou, Barcelona</p>
         </div>
 
-        <!-- Away Team -->
+        
         <div class="match-team">
           <div class="match-team__emblem" style="background:rgba(255,255,255,0.15);">
             ⚪🟣
@@ -129,11 +129,11 @@
     </div>
   </section>
 
-  <!-- Main Room Content -->
+  
   <main id="main-content" class="page-main section-sm">
     <div class="container">
       <div class="match-room-grid">
-        <!-- Column 1: Live Timeline -->
+        
         <section aria-labelledby="timeline-heading">
           <h2 class="heading-2" id="timeline-heading" style="margin-bottom:var(--sp-4);">Match Timeline</h2>
           <div class="timeline" role="feed" aria-label="Minute-by-minute events">
@@ -184,7 +184,7 @@
           </div>
         </section>
 
-        <!-- Column 2: Lineups & MOTM Poll -->
+        
         <section aria-labelledby="lineups-heading" style="display:flex;flex-direction:column;gap:var(--sp-6);">
           <div>
             <h2 class="heading-2" id="lineups-heading" style="margin-bottom:var(--sp-4);">Starting Lineups</h2>
@@ -223,7 +223,7 @@
             </div>
           </div>
 
-          <!-- Man of the Match Poll -->
+          
           <article class="poll" aria-labelledby="motm-title">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-2);">
               <h3 class="poll__title" id="motm-title" style="margin:0;">Man of the Match Poll</h3>
@@ -275,24 +275,24 @@
           </article>
         </section>
 
-        <!-- Column 3: Live Chat (Members Only) -->
+        
         <section aria-labelledby="chat-heading">
           <h2 class="heading-2" id="chat-heading" style="margin-bottom:var(--sp-4);">Live Match Chat</h2>
 
           <div class="live-chat" id="match-live-chat" aria-label="Real-time fan discussion">
-            <!-- Header -->
+            
             <div class="live-chat__header">
               <span class="badge badge--live">LIVE</span>
               <span class="live-chat__title">Camp Nou Terrace</span>
               <span class="text-xs text-muted" style="margin-left:auto;">Members Only</span>
             </div>
 
-            <!-- Messages list -->
+            
             <div class="live-chat__messages" id="chat-messages" role="log" aria-live="polite" aria-atomic="false">
-              <!-- Dynamically populated -->
+              
             </div>
 
-            <!-- Footer: Chat Input or Lock Overlay -->
+            
             <div id="chat-unlocked-footer" class="live-chat__footer">
               <form id="chat-form" style="display:flex;gap:var(--sp-2);width:100%;">
                 <label for="chat-input" class="visually-hidden">Send chat message</label>
@@ -301,13 +301,9 @@
               </form>
             </div>
 
-            <div id="chat-locked-overlay" class="lock-overlay" style="display:none;">
-              <span class="lock-overlay__icon" aria-hidden="true">🔒</span>
-              <h3 class="lock-overlay__title">Members Live Chat</h3>
-              <p class="text-xs" style="color:rgba(255,255,255,0.85);margin-bottom:var(--sp-3);">
-                Live match chat is reserved for registered Members &amp; Supporters.
-              </p>
-              <a href="membership.html" class="btn btn--gold btn--sm">Upgrade to Join Chat</a>
+            <div id="chat-locked-footer" class="live-chat__footer chat-lock" hidden>
+              <p class="text-sm">Sign in to send a message. The terrace stays open to read.</p>
+              <a href="auth.html" class="btn btn--gold btn--sm">Sign In</a>
             </div>
           </div>
         </section>
@@ -315,7 +311,7 @@
     </div>
   </main>
 
-  <!-- Footer -->
+  
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer__grid">

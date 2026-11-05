@@ -6,12 +6,12 @@
   <meta name="description" content="Blaugrana Hub — The unofficial, ad-free fan community for FC Barcelona supporters. Fixtures, squad, history, live chat and more." />
   <title>Blaugrana Hub — FC Barcelona Fan Community</title>
 
-  <!-- Fonts -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Styles -->
+  
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
@@ -25,14 +25,14 @@
   </style>
 </head>
 <body>
-  <!-- Skip to content -->
+  
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <!-- ── Navbar ── -->
+  
   <header>
     <nav class="navbar" aria-label="Main navigation">
       <div class="container navbar__inner">
-        <!-- Brand -->
+        
         <a href="index.html" class="navbar__brand" aria-label="Blaugrana Hub home">
           <svg class="navbar__brand-icon" viewBox="0 0 36 36" aria-hidden="true" fill="none">
             <circle cx="18" cy="18" r="17" fill="#A50044" stroke="#EDBB00" stroke-width="2"/>
@@ -44,7 +44,7 @@
           Blaugrana <span>Hub</span>
         </a>
 
-        <!-- Desktop nav -->
+        
         <ul class="navbar__nav" role="list">
           <li><a href="index.html"           class="navbar__link is-active">Home</a></li>
           <li><a href="pages/feed.html"       class="navbar__link">Community</a></li>
@@ -54,23 +54,23 @@
           <li><a href="pages/membership.html" class="navbar__link navbar__link--cta">Join</a></li>
         </ul>
 
-        <!-- Actions -->
+        
         <div class="navbar__actions">
           <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">
-            <!-- Sun icon -->
+            
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
               <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
               <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
               <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
             </svg>
-            <!-- Moon icon -->
+            
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>
           </button>
 
-          <!-- User pill (shown when logged in) -->
+          
           <button class="navbar__user" id="nav-user" aria-label="User menu" popovertarget="user-dropdown">
             <span class="navbar__user-avatar" id="nav-user-avatar" aria-hidden="true">CD</span>
             <span id="nav-user-label">culerdemo</span>
@@ -84,7 +84,7 @@
 
           <a href="pages/auth.html" class="btn btn--outline-light btn--sm" id="nav-login">Sign In</a>
 
-          <!-- Hamburger -->
+          
           <button class="hamburger" id="hamburger"
             aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation menu">
             <span class="hamburger__line" aria-hidden="true"></span>
@@ -95,7 +95,7 @@
       </div>
     </nav>
 
-    <!-- Mobile nav -->
+    
     <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
       <a href="index.html"           class="mobile-nav__link is-active">🏠 Home</a>
       <a href="pages/feed.html"       class="mobile-nav__link">💬 Community</a>
@@ -109,10 +109,10 @@
     <div class="overlay" id="nav-overlay" aria-hidden="true"></div>
   </header>
 
-  <!-- ── Main ── -->
+  
   <main id="main-content">
 
-    <!-- Hero -->
+    
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__blobs" aria-hidden="true">
         <div class="hero__blob hero__blob--1"></div>
@@ -125,7 +125,7 @@
             Més que<br><span class="accent">un Club</span>
           </h1>
 
-          <!-- Upcoming match + countdown -->
+          
           <div class="hero__countdown">
             <div class="hero__match-teaser" id="hero-match" aria-label="Next match information">
               <span class="hero__match-label">Next Match</span>
@@ -168,7 +168,7 @@
       </div>
     </section>
 
-    <!-- Fixtures Slider -->
+    
     <section class="fixtures-section section" aria-labelledby="fixtures-title">
       <div class="container">
         <div class="section-header">
@@ -182,7 +182,7 @@
 
         <div class="fixtures-slider" aria-label="Fixtures and results carousel">
           <div class="fixtures-track" id="fixtures-track" role="list">
-            <!-- Injected by main.js -->
+            
           </div>
         </div>
 
@@ -198,7 +198,7 @@
       </div>
     </section>
 
-    <!-- Trophy Counter Strip -->
+    
     <section class="trophy-strip" aria-labelledby="trophies-title">
       <div class="container">
         <div class="section-header" style="color:#fff;">
@@ -210,12 +210,12 @@
           <a href="pages/history.html" class="btn btn--outline-light btn--sm">Full History</a>
         </div>
         <div class="trophy-strip__grid" id="trophy-strip" role="list">
-          <!-- Injected by main.js -->
+          
         </div>
       </div>
     </section>
 
-    <!-- Trending Posts Preview -->
+    
     <section class="section" aria-labelledby="posts-title">
       <div class="container">
         <div class="section-header">
@@ -227,12 +227,12 @@
           <a href="pages/feed.html" class="btn btn--outline btn--sm">See All Posts</a>
         </div>
         <div class="posts-preview__grid" id="posts-preview" role="list">
-          <!-- Injected by main.js -->
+          
         </div>
       </div>
     </section>
 
-    <!-- Membership Teaser -->
+    
     <section class="section-sm" aria-labelledby="member-teaser-title">
       <div class="container">
         <div class="membership-teaser">
@@ -259,7 +259,7 @@
 
   </main>
 
-  <!-- ── Footer ── -->
+  
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer__grid">
@@ -304,7 +304,7 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+  
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

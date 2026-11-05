@@ -1,4 +1,4 @@
-/* ── Auth Page ── */
+
 .auth-page {
   min-height: calc(100vh - var(--nav-h));
   display: flex;
@@ -43,7 +43,7 @@
   content: ''; flex: 1; height: 1px; background: var(--color-border);
 }
 
-/* Password strength */
+
 .strength-row {
   display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
   margin-top: var(--sp-1);

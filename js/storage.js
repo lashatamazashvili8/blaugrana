@@ -1,10 +1,4 @@
-/**
- * storage.js — localStorage CRUD wrapper with try/catch
- * All keys are prefixed with "bh_" (blaugrana-hub).
- *
- * ⚠️ This module is for demo/educational use only.
- *    Data is stored unencrypted in browser localStorage.
- */
+
 
 const PREFIX = 'bh_';
 
@@ -48,16 +42,16 @@ export const Storage = {
     }
   },
 
-  // Convenience: get array, append item, write back
+  
   pushTo(key, item) {
     const arr = this.get(key) || [];
-    // Cap arrays at 100 items to avoid quota issues
+    
     if (arr.length >= 100) arr.shift();
     arr.push(item);
     return this.set(key, arr);
   },
 
-  // Update item in array by id
+  
   updateIn(key, id, patch) {
     const arr = this.get(key) || [];
     const idx = arr.findIndex(x => x.id === id);
@@ -66,7 +60,7 @@ export const Storage = {
     return this.set(key, arr);
   },
 
-  // Remove item from array by id
+  
   removeFrom(key, id) {
     const arr = this.get(key) || [];
     const next = arr.filter(x => x.id !== id);

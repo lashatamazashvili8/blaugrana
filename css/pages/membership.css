@@ -1,4 +1,4 @@
-/* ── Membership Page ── */
+
 .pricing-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -15,7 +15,7 @@
   border: 1px solid var(--color-border);
 }
 
-/* Upgrade flow modal */
+
 .upgrade-steps {
   display: flex; flex-direction: column; gap: var(--sp-5);
 }

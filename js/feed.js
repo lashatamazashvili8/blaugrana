@@ -20,14 +20,12 @@ function renderFeed() {
   const container = document.getElementById('post-list-container');
   if (!container) return;
 
-  let displayedPosts = [...posts];
+  let displayedPosts = [...posts].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
   if (activeFilter === 'Top') {
     displayedPosts.sort((a, b) => (b.likes?.length || 0) - (a.likes?.length || 0));
   } else if (activeFilter !== 'All') {
     displayedPosts = displayedPosts.filter(p => p.tag?.toLowerCase() === activeFilter.toLowerCase());
-  } else {
-    displayedPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
   }
 
   if (displayedPosts.length === 0) {
@@ -367,14 +365,15 @@ function initComposer() {
     if (fileInput) fileInput.value = '';
   });
 
-  form?.addEventListener('submit', (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!composerFormik.isValid) {
-      const err = composerFormik.errors.content || 'Please check your post content.';
+    composerFormik.setFieldValue('content', textarea?.value || '', false);
+    composerFormik.setFieldValue('tag', tagSelect?.value || 'Match', false);
+    const ok = await composerFormik.handleSubmit(e);
+    if (!ok) {
+      const err = composerFormik.errors.content || composerFormik.errors.tag || 'Please check your post content.';
       showToast(err, 'warning');
-      return;
     }
-    composerFormik.handleSubmit(e);
   });
 }
 

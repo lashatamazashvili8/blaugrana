@@ -1,6 +1,4 @@
-/**
- * theme.js — Light/Dark theme toggle, persisted in localStorage
- */
+
 import { Storage } from './storage.js';
 
 const THEME_KEY = 'theme';

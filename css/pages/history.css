@@ -1,4 +1,47 @@
-/* ── History Page ── */
+
+.history-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-10);
+}
+@media (min-width: 700px) {
+  .history-facts { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1100px) {
+  .history-facts { grid-template-columns: repeat(4, 1fr); }
+}
+.history-facts__card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-garnet);
+  border-radius: var(--radius-card);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-card);
+}
+.history-facts__label {
+  display: block;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--sp-1);
+}
+.history-facts__card strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  text-transform: uppercase;
+  color: var(--color-navy);
+}
+.history-facts__detail {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
 .history-controls {
   display: flex;
   flex-direction: column;
@@ -62,7 +105,7 @@
   margin-top: 2px;
 }
 
-/* Timeline Layout */
+
 .timeline-vert {
   position: relative;
   padding-left: var(--sp-8);

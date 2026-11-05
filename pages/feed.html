@@ -6,12 +6,12 @@
   <meta name="description" content="Blaugrana Hub Community Feed — Discuss matches, transfers, tactics and club news with fellow Culers." />
   <title>Community Feed — Blaugrana Hub</title>
 
-  <!-- Fonts -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Styles -->
+  
   <link rel="stylesheet" href="../css/variables.css" />
   <link rel="stylesheet" href="../css/base.css" />
   <link rel="stylesheet" href="../css/layout.css" />
@@ -38,7 +38,7 @@
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <!-- Header -->
+  
   <header>
     <nav class="navbar" aria-label="Main navigation">
       <div class="container navbar__inner">
@@ -110,7 +110,7 @@
     <div class="overlay" id="nav-overlay" aria-hidden="true"></div>
   </header>
 
-  <!-- Main Content -->
+  
   <main id="main-content" class="page-main section-sm">
     <div class="container">
       <div class="section-header">
@@ -133,17 +133,17 @@
         <section aria-labelledby="posts-heading" style="display:flex;flex-direction:column;gap:var(--sp-6);">
           <h2 id="posts-heading" class="visually-hidden">Community Posts Feed</h2>
 
-          <!-- Create Post Card -->
+          
           <article class="create-post" id="create-post-container" aria-label="Create a new post">
             <div id="create-post-auth">
               <form id="create-post-form">
                 <div class="create-post__top">
                   <div class="avatar" id="author-avatar" aria-hidden="true">CD</div>
                   <label for="post-textarea" class="visually-hidden">Write a post</label>
-                  <textarea id="post-textarea" placeholder="Share your thoughts with the Blaugrana community..." required maxlength="500"></textarea>
+                  <textarea id="post-textarea" name="content" placeholder="Share your thoughts with the Blaugrana community..." required maxlength="500"></textarea>
                 </div>
 
-                <!-- Optional Image Preview -->
+                
                 <div class="img-preview" id="img-preview-box">
                   <img id="img-preview-el" alt="Selected post image preview" src="" />
                   <button type="button" class="img-preview__remove" id="img-preview-remove" aria-label="Remove attached image">✕</button>
@@ -152,7 +152,7 @@
                 <div class="create-post__meta">
                   <div style="display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap;">
                     <label for="post-tag-select" class="form-label text-xs">Topic:</label>
-                    <select id="post-tag-select" class="form-select" style="padding:4px 8px;font-size:var(--fs-xs);width:auto;">
+                    <select id="post-tag-select" name="tag" class="form-select" style="padding:4px 8px;font-size:var(--fs-xs);width:auto;">
                       <option value="Match">⚽ Match</option>
                       <option value="Transfers">🔄 Transfers</option>
                       <option value="History">📜 History</option>
@@ -180,7 +180,7 @@
               </form>
             </div>
 
-            <!-- Gated Notice when not logged in -->
+            
             <div id="create-post-gated" class="locked-create" style="display:none;">
               <p>🔒 <strong>Join the conversation!</strong></p>
               <p class="text-sm">Sign in or create an account to share posts, like, and comment.</p>
@@ -191,13 +191,13 @@
             </div>
           </article>
 
-          <!-- Posts List Container -->
+          
           <div class="post-list" id="post-list-container" role="feed" aria-busy="false" aria-label="Community discussion posts">
-            <!-- Dynamically populated by feed.js -->
+            
           </div>
         </section>
 
-        <!-- Sidebar / Guidelines -->
+        
         <aside class="feed-sidebar" aria-label="Community guidelines and trending tags">
           <div class="sidebar-card">
             <h3 class="sidebar-card__title">Community Guidelines</h3>
@@ -223,7 +223,7 @@
     </div>
   </main>
 
-  <!-- Footer -->
+  
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer__grid">

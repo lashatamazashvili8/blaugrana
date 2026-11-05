@@ -1,6 +1,4 @@
-/**
- * live.js — Live and upcoming events listing with member-only lock state
- */
+
 import { Storage } from './storage.js';
 import { isMember, updateNavUI } from './auth.js';
 import { initTheme, toggleTheme } from './theme.js';

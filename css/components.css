@@ -1,8 +1,6 @@
-/* ============================================================
-   components.css — Cards, Buttons, Forms, Modal, Tabs, etc.
-   ============================================================ */
 
-/* ── Buttons ── */
+
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -73,7 +71,7 @@
 .btn--full { width: 100%; }
 .btn--icon { padding: var(--sp-2); border-radius: var(--radius-sm); }
 
-/* ── Card ── */
+
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-card);
@@ -104,7 +102,7 @@
   display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
 }
 
-/* ── Form controls ── */
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -145,7 +143,7 @@
 .form-error { font-size: var(--fs-xs); color: var(--color-error); display: none; }
 .form-error.is-visible { display: block; }
 
-/* Password strength bar */
+
 .strength-bar {
   height: 4px;
   background: var(--color-border);
@@ -160,7 +158,7 @@
 }
 .strength-label { font-size: var(--fs-xs); font-weight: var(--fw-semi); }
 
-/* ── Tabs ── */
+
 .tabs { display: flex; gap: 0; border-bottom: 2px solid var(--color-border); }
 .tab-btn {
   padding: var(--sp-3) var(--sp-5);
@@ -183,7 +181,7 @@
 .tab-panel { display: none; }
 .tab-panel.is-active { display: block; animation: fade-in var(--dur-base) var(--ease); }
 
-/* ── Modal ── */
+
 .modal {
   position: fixed; inset: 0;
   display: flex; align-items: center; justify-content: center;
@@ -231,7 +229,7 @@
   display: flex; gap: var(--sp-3); justify-content: flex-end;
 }
 
-/* ── Accordion ── */
+
 .accordion { display: flex; flex-direction: column; gap: var(--sp-2); }
 .accordion-item {
   background: var(--color-surface);
@@ -269,7 +267,7 @@
   line-height: var(--lh-base);
 }
 
-/* ── Filter chips ── */
+
 .filter-chips {
   display: flex;
   gap: var(--sp-2);
@@ -292,7 +290,7 @@
   background: var(--color-navy); color: #fff; border-color: var(--color-navy);
 }
 
-/* ── Avatar ── */
+
 .avatar {
   width: 40px; height: 40px;
   border-radius: 50%;
@@ -309,7 +307,7 @@
 .avatar--lg { width: 80px; height: 80px; font-size: var(--fs-xl); }
 .avatar--xl { width: 120px; height: 120px; font-size: var(--fs-2xl); }
 
-/* ── Stat item ── */
+
 .stat-item {
   text-align: center;
   padding: var(--sp-4);
@@ -331,7 +329,7 @@
   margin-top: var(--sp-1);
 }
 
-/* ── Like button ── */
+
 .like-btn {
   display: inline-flex; align-items: center; gap: var(--sp-2);
   padding: var(--sp-2) var(--sp-3);
@@ -351,7 +349,7 @@
 }
 .like-btn svg { width: 16px; height: 16px; }
 
-/* ── Pricing card ── */
+
 .pricing-card {
   background: var(--color-surface);
   border: 2px solid var(--color-border);
@@ -389,7 +387,7 @@
 .pricing-card__feature--no { color: var(--color-text-muted); }
 .pricing-card__feature--no svg { color: var(--color-border); }
 
-/* ── Progress / Loading ── */
+
 .spinner {
   width: 24px; height: 24px;
   border: 3px solid var(--color-border);
@@ -398,7 +396,7 @@
   animation: spin 0.8s linear infinite;
 }
 
-/* ── Comparison table ── */
+
 .compare-table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
 .compare-table th, .compare-table td {
   padding: var(--sp-3) var(--sp-4);

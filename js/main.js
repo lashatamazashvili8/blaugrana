@@ -1,12 +1,10 @@
-/**
- * main.js — Home page: seed data, countdown, fixtures slider, trophy strip, posts preview
- */
+
 import { Storage } from './storage.js';
 import { initTheme, toggleTheme } from './theme.js';
 import { initNav, initCountUp, initLazyImages, formatDate, formatRelative, showToast, seedIfNeeded } from './ui.js';
 import { updateNavUI } from './auth.js';
 
-/* ── Countdown ── */
+
 function startCountdown(targetDate) {
   const days  = document.getElementById('cd-days');
   const hours = document.getElementById('cd-hours');
@@ -35,7 +33,7 @@ function startCountdown(targetDate) {
   setInterval(tick, 1000);
 }
 
-/* ── Fixtures Slider ── */
+
 function buildFixtureCard(fixture) {
   const isPast = fixture.status === 'result';
   const isHome = fixture.homeTeam.toLowerCase().includes('barcelona');
@@ -129,7 +127,7 @@ function initFixturesSlider() {
 
   track.innerHTML = fixtures.map(buildFixtureCard).join('');
 
-  // Responsive items per view
+  
   function itemsPerView() { return window.innerWidth >= 768 ? (window.innerWidth >= 1024 ? 3 : 2) : 1; }
   let current = 0;
   const total  = fixtures.length;
@@ -156,7 +154,7 @@ function initFixturesSlider() {
     const cardW = track.querySelector('.fixture-card')?.offsetWidth || 280;
     const gap = 16;
     track.style.transform = `translateX(-${current * (cardW + gap) * itemsPerView()}px)`;
-    // Update dots
+    
     dotsEl?.querySelectorAll('.slider-dot').forEach((d, i) => {
       d.classList.toggle('is-active', i === current);
       d.setAttribute('aria-selected', String(i === current));
@@ -168,7 +166,7 @@ function initFixturesSlider() {
   prevBtn?.addEventListener('click', () => goTo(current - 1));
   nextBtn?.addEventListener('click', () => goTo(current + 1));
 
-  // Touch support
+  
   let touchStartX = 0;
   track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
   track.addEventListener('touchend', e => {
@@ -179,7 +177,7 @@ function initFixturesSlider() {
   buildDots();
   goTo(0);
 
-  // Rebuild on resize (debounced)
+  
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
@@ -187,7 +185,7 @@ function initFixturesSlider() {
   });
 }
 
-/* ── Trophy Strip ── */
+
 function initTrophyStrip() {
   const trophies = Storage.get('trophies') || [];
   const strip    = document.getElementById('trophy-strip');
@@ -203,7 +201,7 @@ function initTrophyStrip() {
   initCountUp('[data-count]');
 }
 
-/* ── Posts Preview ── */
+
 function initPostsPreview() {
   const posts = (Storage.get('posts') || []).slice(0, 3);
   const container = document.getElementById('posts-preview');
@@ -236,7 +234,7 @@ function initPostsPreview() {
       </div>
     </article>`).join('');
 
-  // Make cards keyboard-activatable
+  
   container.querySelectorAll('.card--link').forEach(card => {
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -246,7 +244,7 @@ function initPostsPreview() {
   });
 }
 
-/* ── Next match hero info ── */
+
 function initHeroMatch() {
   const fixtures = Storage.get('fixtures') || [];
   const next = fixtures.find(f => f.status === 'upcoming') || DEFAULT_NEXT_MATCH;
@@ -262,7 +260,7 @@ function initHeroMatch() {
   startCountdown(next.date);
 }
 
-/* ── Boot ── */
+
 async function init() {
   initTheme();
   await seedIfNeeded();
