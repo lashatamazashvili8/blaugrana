@@ -153,3 +153,21 @@
   padding: var(--sp-6);
   color: var(--color-text-muted);
 }
+
+/* Delete button on posts and comments */
+.post-card__delete {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  cursor: pointer;
+  padding: 2px var(--sp-2);
+  border-radius: var(--radius-sm);
+  transition: background var(--dur-fast), color var(--dur-fast);
+  white-space: nowrap;
+}
+.post-card__delete:hover {
+  background: rgba(165, 0, 68, 0.08);
+  color: var(--color-garnet);
+}

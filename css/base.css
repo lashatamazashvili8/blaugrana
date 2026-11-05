@@ -72,6 +72,12 @@ h1,h2,h3,h4,h5,h6 {
 .text-xs    { font-size: var(--fs-xs); }
 .text-center { text-align: center; }
 
+/* ── Font weight helpers ── */
+.font-normal { font-weight: var(--fw-normal); }
+.font-medium { font-weight: var(--fw-medium); }
+.font-semi   { font-weight: var(--fw-semi); }
+.font-bold   { font-weight: var(--fw-bold); }
+
 /* ── Utility classes ── */
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
