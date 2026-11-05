@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sign in or register for Blaugrana Hub — the unofficial FC Barcelona fan community." />
+  <title>Sign In & Register — Blaugrana Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/pages/auth.css" />
+
+  <style>
+    #nav-user { display: none; }
+    .hidden { display: none !important; }
+    .demo-accounts {
+      margin-top: var(--sp-4);
+      padding: var(--sp-3);
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-xs);
+    }
+    .demo-accounts button {
+      display: inline-block;
+      margin-top: 4px;
+      margin-right: 6px;
+      padding: 2px 8px;
+      background: var(--color-navy);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-xs);
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="container navbar__inner">
+        <a href="../index.html" class="navbar__brand" aria-label="Blaugrana Hub home">
+          <svg class="navbar__brand-icon" viewBox="0 0 36 36" aria-hidden="true" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#A50044" stroke="#EDBB00" stroke-width="2"/>
+            <path d="M18 4 C11 4 6 10 6 18 C6 26 11 32 18 32 C25 32 30 26 30 18 C30 10 25 4 18 4Z" fill="#004D98"/>
+            <path d="M18 4 L18 32" stroke="#EDBB00" stroke-width="2"/>
+            <path d="M6 18 L30 18" stroke="#EDBB00" stroke-width="1" stroke-opacity="0.5"/>
+            <text x="18" y="22" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="10">BH</text>
+          </svg>
+          Blaugrana <span>Hub</span>
+        </a>
+
+        <ul class="navbar__nav" role="list">
+          <li><a href="../index.html" class="navbar__link">Home</a></li>
+          <li><a href="feed.html" class="navbar__link">Community</a></li>
+          <li><a href="live.html" class="navbar__link">Live</a></li>
+          <li><a href="squad.html" class="navbar__link">Squad</a></li>
+          <li><a href="history.html" class="navbar__link">History</a></li>
+          <li><a href="membership.html" class="navbar__link navbar__link--cta">Join</a></li>
+        </ul>
+
+        <div class="navbar__actions">
+          <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+
+          <button class="navbar__user" id="nav-user" aria-label="User menu" popovertarget="user-dropdown">
+            <span class="navbar__user-avatar" id="nav-user-avatar" aria-hidden="true">CD</span>
+            <span id="nav-user-label">culerdemo</span>
+          </button>
+          <div id="user-dropdown" popover style="position:fixed;top:68px;right:16px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);padding:var(--sp-2);min-width:160px;z-index:var(--z-nav);">
+            <a href="profile.html" style="display:block;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);">My Profile</a>
+            <a href="membership.html" style="display:block;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);">Membership</a>
+            <hr style="border:none;border-top:1px solid var(--color-border);margin:var(--sp-2) 0;">
+            <button id="nav-logout" style="display:block;width:100%;text-align:left;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);color:var(--color-garnet);">Log out</button>
+          </div>
+
+          <a href="auth.html" class="btn btn--outline-light btn--sm is-active" id="nav-login">Sign In</a>
+
+          <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation menu">
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="../index.html" class="mobile-nav__link">🏠 Home</a>
+      <a href="feed.html" class="mobile-nav__link">💬 Community</a>
+      <a href="live.html" class="mobile-nav__link">📡 Live</a>
+      <a href="squad.html" class="mobile-nav__link">👥 Squad</a>
+      <a href="history.html" class="mobile-nav__link">📜 History</a>
+      <div class="mobile-nav__sep" aria-hidden="true"></div>
+      <a href="membership.html" class="mobile-nav__link">⭐ Join / Upgrade</a>
+      <a href="auth.html" class="mobile-nav__link is-active" id="mobile-login">🔑 Sign In</a>
+    </nav>
+    <div class="overlay" id="nav-overlay" aria-hidden="true"></div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="auth-page">
+    <div class="auth-card" id="auth-container">
+      <div class="auth-card__header">
+        <h1 class="auth-card__logo">Blaugrana <span>Hub</span></h1>
+        <p class="auth-card__subtitle">Your Fan Community Pass</p>
+      </div>
+
+      <!-- Auth Tabs -->
+      <div class="auth-card__tabs">
+        <div class="tabs" role="tablist" aria-label="Authentication Options">
+          <button type="button" class="tab-btn is-active" role="tab" id="tab-login" aria-selected="true" aria-controls="panel-login">
+            Sign In
+          </button>
+          <button type="button" class="tab-btn" role="tab" id="tab-register" aria-selected="false" aria-controls="panel-register" tabindex="-1">
+            Register
+          </button>
+        </div>
+      </div>
+
+      <div class="auth-card__body">
+        <!-- Login Panel -->
+        <div class="tab-panel is-active" id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+          <form id="login-form" class="auth-form" novalidate>
+            <div class="form-group">
+              <label for="login-id" class="form-label">Email or Username <span class="required" aria-hidden="true">*</span></label>
+              <input type="text" id="login-id" class="form-input" autocomplete="username" required placeholder="culerdemo or demo@blaugrana.hub" aria-describedby="login-id-error" />
+              <p class="form-error" id="login-id-error">Please enter your username or email address.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="login-password" class="form-label">Password <span class="required" aria-hidden="true">*</span></label>
+              <input type="password" id="login-password" class="form-input" autocomplete="current-password" required placeholder="••••••••" aria-describedby="login-password-error" />
+              <p class="form-error" id="login-password-error">Password is required.</p>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--full" id="login-submit-btn">
+              Sign In to Blaugrana Hub
+            </button>
+          </form>
+
+          <div class="demo-accounts" aria-label="Demo accounts for quick evaluation">
+            <p><strong>Demo Test Accounts (click to fill):</strong></p>
+            <button type="button" id="fill-demo-supporter">Supporter: culerdemo</button>
+            <button type="button" id="fill-demo-member">Member: blaugrana_fan</button>
+            <button type="button" id="fill-demo-free">Free: freeuser</button>
+          </div>
+        </div>
+
+        <!-- Register Panel -->
+        <div class="tab-panel" id="panel-register" role="tabpanel" aria-labelledby="tab-register">
+          <form id="register-form" class="auth-form" novalidate>
+            <div class="form-group">
+              <label for="reg-username" class="form-label">Username <span class="required" aria-hidden="true">*</span></label>
+              <input type="text" id="reg-username" class="form-input" autocomplete="username" required placeholder="e.g. camp_nou_hero" aria-describedby="reg-username-error" />
+              <p class="form-hint">At least 3 characters (letters, numbers, underscores).</p>
+              <p class="form-error" id="reg-username-error">Username must be at least 3 alphanumeric characters.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-email" class="form-label">Email Address <span class="required" aria-hidden="true">*</span></label>
+              <input type="email" id="reg-email" class="form-input" autocomplete="email" required placeholder="fan@domain.com" aria-describedby="reg-email-error" />
+              <p class="form-error" id="reg-email-error">Please enter a valid email address.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-password" class="form-label">Password <span class="required" aria-hidden="true">*</span></label>
+              <input type="password" id="reg-password" class="form-input" autocomplete="new-password" required placeholder="Min 6 characters" aria-describedby="reg-password-error" />
+              <div class="strength-bar" aria-hidden="true">
+                <div class="strength-bar__fill" id="strength-meter-bar"></div>
+              </div>
+              <div class="strength-row">
+                <span class="text-xs text-muted">Strength:</span>
+                <span class="strength-label" id="strength-meter-label">Enter password</span>
+              </div>
+              <p class="form-error" id="reg-password-error">Password must have at least 6 characters.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-confirm" class="form-label">Confirm Password <span class="required" aria-hidden="true">*</span></label>
+              <input type="password" id="reg-confirm" class="form-input" autocomplete="new-password" required placeholder="Re-enter password" aria-describedby="reg-confirm-error" />
+              <p class="form-error" id="reg-confirm-error">Passwords do not match.</p>
+            </div>
+
+            <button type="submit" class="btn btn--garnet btn--full" id="register-submit-btn">
+              Create Fan Account
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">Blaugrana <span>Hub</span></div>
+          <p class="footer__tagline">The unofficial, ad-free fan community for FC Barcelona supporters worldwide.</p>
+        </div>
+        <div>
+          <p class="footer__heading">Navigation</p>
+          <ul class="footer__links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="feed.html">Community Feed</a></li>
+            <li><a href="live.html">Live Events</a></li>
+            <li><a href="squad.html">Squad</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Community</p>
+          <ul class="footer__links">
+            <li><a href="history.html">Club History</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="profile.html">Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Notice</p>
+          <p class="text-xs text-muted" style="line-height:1.5;">Demo site only. Password authentication is simulated with local storage.</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__disclaimer">⚠️ Unofficial Fan Project — Not affiliated with FC Barcelona</p>
+        <p>© 2026 Blaugrana Hub. Ad-free fan community.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/auth-page.js"></script>
+</body>
+</html>
