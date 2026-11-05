@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="FC Barcelona First Team Squad — Interactive player cards with stats, appearances, ratings and position filters." />
+  <meta name="description" content="FC Barcelona First Team Squad — Interactive player cards, stats, search, and position filters." />
   <title>First Team Squad — Blaugrana Hub</title>
 
   <!-- Fonts -->
@@ -26,7 +26,6 @@
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <!-- Header -->
   <header>
     <nav class="navbar" aria-label="Main navigation">
       <div class="container navbar__inner">
@@ -98,7 +97,6 @@
     <div class="overlay" id="nav-overlay" aria-hidden="true"></div>
   </header>
 
-  <!-- Main Content -->
   <main id="main-content" class="page-main section-sm">
     <div class="container">
       <div class="section-header">
@@ -108,7 +106,7 @@
           <span class="accent-line" aria-hidden="true"></span>
         </div>
         <div class="filter-chips" role="toolbar" aria-label="Filter squad by position">
-          <button type="button" class="chip is-active" data-pos-filter="all">All Players</button>
+          <button type="button" class="chip is-active" data-pos-filter="all">All (<span id="count-all">0</span>)</button>
           <button type="button" class="chip" data-pos-filter="Goalkeeper">🧤 Goalkeepers</button>
           <button type="button" class="chip" data-pos-filter="Defender">🛡️ Defenders</button>
           <button type="button" class="chip" data-pos-filter="Midfielder">⚡ Midfielders</button>
@@ -116,18 +114,47 @@
         </div>
       </div>
 
-      <p class="text-sm text-muted" style="margin-bottom:var(--sp-6);">
-        💡 <em>Hover or tap/press Space on any card to flip and view player statistics &amp; ratings.</em>
-      </p>
+      <div class="squad-controls">
+        <div class="squad-search-wrap">
+          <span class="squad-search-icon" aria-hidden="true">🔍</span>
+          <label for="squad-search-input" class="visually-hidden">Search players</label>
+          <input type="text" id="squad-search-input" class="form-input" placeholder="Search by player name or jersey #..." />
+        </div>
 
-      <!-- Squad Cards Grid -->
+        <div style="display:flex;align-items:center;gap:var(--sp-2);">
+          <label for="squad-sort-select" class="form-label text-xs">Sort By:</label>
+          <select id="squad-sort-select" class="form-select" style="padding:6px 12px;font-size:var(--fs-sm);width:auto;">
+            <option value="number">Jersey Number</option>
+            <option value="rating">Match Rating (Highest)</option>
+            <option value="name">Name (A-Z)</option>
+            <option value="appearances">Most Appearances</option>
+          </select>
+        </div>
+      </div>
+
       <div class="squad-grid" id="squad-grid-container" role="list" aria-label="First team squad members">
-        <!-- Injected by squad.js -->
       </div>
     </div>
   </main>
 
-  <!-- Footer -->
+  <div class="modal" id="player-modal" role="dialog" aria-modal="true" aria-labelledby="player-modal-name" aria-hidden="true">
+    <div class="modal__backdrop"></div>
+    <div class="modal__box" style="max-width:540px;">
+      <div class="modal__header">
+        <div style="display:flex;align-items:center;gap:var(--sp-3);">
+          <span class="badge badge--gold" id="player-modal-num">#19</span>
+          <h3 class="modal__title" id="player-modal-name" style="margin:0;">Lamine Yamal</h3>
+        </div>
+        <button type="button" class="modal__close" data-modal-close aria-label="Close player details">✕</button>
+      </div>
+      <div class="modal__body" id="player-modal-body">
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn btn--outline btn--sm" data-modal-close>Close</button>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer__grid">
