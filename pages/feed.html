@@ -160,9 +160,14 @@
                     </select>
 
                     <label class="btn btn--outline btn--sm" style="cursor:pointer;" for="post-image-file">
-                      📷 Add Image
+                      📷 Upload Image
                     </label>
                     <input type="file" id="post-image-file" accept="image/*" class="visually-hidden" />
+
+                    <button type="button" class="btn btn--outline btn--sm" id="btn-toggle-img-url" title="Attach image via web link">
+                      🔗 Image URL
+                    </button>
+                    <input type="url" id="post-image-url" placeholder="Paste image URL (https://...)" class="form-input text-xs" style="display:none;padding:4px 8px;width:220px;" />
                   </div>
 
                   <div class="create-post__actions">

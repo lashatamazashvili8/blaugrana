@@ -254,10 +254,28 @@ function initComposer() {
   const textarea = document.getElementById('post-textarea');
   const charCounter = document.getElementById('char-counter');
   const fileInput = document.getElementById('post-image-file');
+  const urlToggleBtn = document.getElementById('btn-toggle-img-url');
+  const urlInput = document.getElementById('post-image-url');
   const previewBox = document.getElementById('img-preview-box');
   const previewImg = document.getElementById('img-preview-el');
   const removeImgBtn = document.getElementById('img-preview-remove');
   const tagSelect = document.getElementById('post-tag-select');
+
+  urlToggleBtn?.addEventListener('click', () => {
+    if (!urlInput) return;
+    const isHidden = urlInput.style.display === 'none';
+    urlInput.style.display = isHidden ? 'inline-block' : 'none';
+    if (isHidden) urlInput.focus();
+  });
+
+  urlInput?.addEventListener('input', () => {
+    const val = urlInput.value.trim();
+    if (val && /^https?:\/\/.+/i.test(val)) {
+      currentImageData = val;
+      previewImg.src = val;
+      previewBox.classList.add('is-visible');
+    }
+  });
 
   const composerFormik = createFormik({
     initialValues: {
@@ -277,23 +295,39 @@ function initComposer() {
         username: session.username,
         content: values.content.trim(),
         tag: values.tag,
-        image: currentImageData,
+        image: currentImageData || null,
         timestamp: new Date().toISOString(),
         likes: [],
         comments: []
       };
 
-      Storage.pushTo('posts', newPost);
+      const posts = Storage.get('posts') || [];
+      posts.unshift(newPost);
+      Storage.set('posts', posts);
 
       resetForm();
-      charCounter.textContent = '500';
+      if (textarea) textarea.value = '';
+      if (charCounter) charCounter.textContent = '500';
       currentImageData = null;
-      previewImg.src = '';
-      previewBox.classList.remove('is-visible');
+      if (previewImg) previewImg.src = '';
+      if (previewBox) previewBox.classList.remove('is-visible');
       if (fileInput) fileInput.value = '';
+      if (urlInput) {
+        urlInput.value = '';
+        urlInput.style.display = 'none';
+      }
 
-      showToast('Your post has been published and saved to local storage!', 'success');
+      activeFilter = 'All';
+      document.querySelectorAll('.filter-chips button.chip').forEach(c => {
+        c.classList.toggle('is-active', c.dataset.filter === 'All');
+      });
+
       renderFeed();
+
+      const listEl = document.getElementById('post-list-container');
+      listEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      showToast('Your post has been published and added to the top!', 'success');
     }
   });
 
