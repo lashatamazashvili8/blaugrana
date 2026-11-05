@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blaugrana Hub — The unofficial, ad-free fan community for FC Barcelona supporters. Fixtures, squad, history, live chat and more." />
+  <title>Blaugrana Hub — FC Barcelona Fan Community</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/home.css" />
+
+  <style>
+    /* Inline critical: hide user pill before JS runs */
+    #nav-user { display: none; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <!-- Skip to content -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ── Navbar ── -->
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="container navbar__inner">
+        <!-- Brand -->
+        <a href="/index.html" class="navbar__brand" aria-label="Blaugrana Hub home">
+          <svg class="navbar__brand-icon" viewBox="0 0 36 36" aria-hidden="true" fill="none">
+            <circle cx="18" cy="18" r="17" fill="#A50044" stroke="#EDBB00" stroke-width="2"/>
+            <path d="M18 4 C11 4 6 10 6 18 C6 26 11 32 18 32 C25 32 30 26 30 18 C30 10 25 4 18 4Z" fill="#004D98"/>
+            <path d="M18 4 L18 32" stroke="#EDBB00" stroke-width="2"/>
+            <path d="M6 18 L30 18" stroke="#EDBB00" stroke-width="1" stroke-opacity="0.5"/>
+            <text x="18" y="22" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="10">BH</text>
+          </svg>
+          Blaugrana <span>Hub</span>
+        </a>
+
+        <!-- Desktop nav -->
+        <ul class="navbar__nav" role="list">
+          <li><a href="/index.html"           class="navbar__link is-active">Home</a></li>
+          <li><a href="/pages/feed.html"       class="navbar__link">Community</a></li>
+          <li><a href="/pages/live.html"       class="navbar__link">Live</a></li>
+          <li><a href="/pages/squad.html"      class="navbar__link">Squad</a></li>
+          <li><a href="/pages/history.html"    class="navbar__link">History</a></li>
+          <li><a href="/pages/membership.html" class="navbar__link navbar__link--cta">Join</a></li>
+        </ul>
+
+        <!-- Actions -->
+        <div class="navbar__actions">
+          <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">
+            <!-- Sun icon -->
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <!-- Moon icon -->
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+
+          <!-- User pill (shown when logged in) -->
+          <button class="navbar__user" id="nav-user" aria-label="User menu" popovertarget="user-dropdown">
+            <span class="navbar__user-avatar" id="nav-user-avatar" aria-hidden="true">CD</span>
+            <span id="nav-user-label">culerdemo</span>
+          </button>
+          <div id="user-dropdown" popover style="position:fixed;top:68px;right:16px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);padding:var(--sp-2);min-width:160px;z-index:var(--z-nav);">
+            <a href="/pages/profile.html" style="display:block;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);">My Profile</a>
+            <a href="/pages/membership.html" style="display:block;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);">Membership</a>
+            <hr style="border:none;border-top:1px solid var(--color-border);margin:var(--sp-2) 0;">
+            <button id="nav-logout" style="display:block;width:100%;text-align:left;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);font-size:var(--fs-sm);color:var(--color-garnet);">Log out</button>
+          </div>
+
+          <a href="/pages/auth.html" class="btn btn--outline-light btn--sm" id="nav-login">Sign In</a>
+
+          <!-- Hamburger -->
+          <button class="hamburger" id="hamburger"
+            aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation menu">
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile nav -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="/index.html"           class="mobile-nav__link is-active">🏠 Home</a>
+      <a href="/pages/feed.html"       class="mobile-nav__link">💬 Community</a>
+      <a href="/pages/live.html"       class="mobile-nav__link">📡 Live</a>
+      <a href="/pages/squad.html"      class="mobile-nav__link">👥 Squad</a>
+      <a href="/pages/history.html"    class="mobile-nav__link">📜 History</a>
+      <div class="mobile-nav__sep" aria-hidden="true"></div>
+      <a href="/pages/membership.html" class="mobile-nav__link">⭐ Join / Upgrade</a>
+      <a href="/pages/auth.html"       class="mobile-nav__link" id="mobile-login">🔑 Sign In</a>
+    </nav>
+    <div class="overlay" id="nav-overlay" aria-hidden="true"></div>
+  </header>
+
+  <!-- ── Main ── -->
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__blobs" aria-hidden="true">
+        <div class="hero__blob hero__blob--1"></div>
+        <div class="hero__blob hero__blob--2"></div>
+      </div>
+      <div class="container">
+        <div class="hero__content animate-fade-up">
+          <p class="hero__eyebrow">Unofficial Fan Community</p>
+          <h1 class="hero__title" id="hero-title">
+            Més que<br><span class="accent">un Club</span>
+          </h1>
+
+          <!-- Upcoming match + countdown -->
+          <div class="hero__countdown">
+            <div class="hero__match-teaser" id="hero-match" aria-label="Next match information">
+              <span class="hero__match-label">Next Match</span>
+              <div class="hero__match-teams">
+                <span id="hero-home">FC Barcelona</span>
+                <span class="hero__match-vs">vs</span>
+                <span id="hero-away">—</span>
+              </div>
+              <span class="hero__match-info" id="hero-match-info">Loading…</span>
+            </div>
+
+            <div class="countdown" role="timer" aria-label="Countdown to next match" id="countdown">
+              <div class="countdown__unit">
+                <span class="countdown__num" id="cd-days">00</span>
+                <span class="countdown__label">Days</span>
+              </div>
+              <span class="countdown__sep" aria-hidden="true">:</span>
+              <div class="countdown__unit">
+                <span class="countdown__num" id="cd-hours">00</span>
+                <span class="countdown__label">Hrs</span>
+              </div>
+              <span class="countdown__sep" aria-hidden="true">:</span>
+              <div class="countdown__unit">
+                <span class="countdown__num" id="cd-mins">00</span>
+                <span class="countdown__label">Min</span>
+              </div>
+              <span class="countdown__sep" aria-hidden="true">:</span>
+              <div class="countdown__unit">
+                <span class="countdown__num" id="cd-secs">00</span>
+                <span class="countdown__label">Sec</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__actions">
+            <a href="/pages/feed.html"       class="btn btn--gold btn--lg">Join the Discussion</a>
+            <a href="/pages/membership.html" class="btn btn--outline-light btn--lg">Become a Member</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fixtures Slider -->
+    <section class="fixtures-section section" aria-labelledby="fixtures-title">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-header__eyebrow">Schedule</span>
+            <h2 class="heading-1" id="fixtures-title">Fixtures &amp; Results</h2>
+            <span class="accent-line" aria-hidden="true"></span>
+          </div>
+          <a href="/pages/live.html" class="btn btn--outline btn--sm">View All</a>
+        </div>
+
+        <div class="fixtures-slider" aria-label="Fixtures and results carousel">
+          <div class="fixtures-track" id="fixtures-track" role="list">
+            <!-- Injected by main.js -->
+          </div>
+        </div>
+
+        <div class="slider-controls" aria-label="Slider navigation">
+          <button class="slider-btn" id="slider-prev" aria-label="Previous fixtures">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="slider-dots" id="slider-dots" role="tablist" aria-label="Fixture slides"></div>
+          <button class="slider-btn" id="slider-next" aria-label="Next fixtures">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trophy Counter Strip -->
+    <section class="trophy-strip" aria-labelledby="trophies-title">
+      <div class="container">
+        <div class="section-header" style="color:#fff;">
+          <div>
+            <span class="section-header__eyebrow" style="color:var(--color-gold);">Legacy</span>
+            <h2 class="heading-1" id="trophies-title" style="color:#fff;">Trophy Cabinet</h2>
+            <span class="accent-line" aria-hidden="true"></span>
+          </div>
+          <a href="/pages/history.html" class="btn btn--outline-light btn--sm">Full History</a>
+        </div>
+        <div class="trophy-strip__grid" id="trophy-strip" role="list">
+          <!-- Injected by main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Trending Posts Preview -->
+    <section class="section" aria-labelledby="posts-title">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-header__eyebrow">Community</span>
+            <h2 class="heading-1" id="posts-title">Trending Discussions</h2>
+            <span class="accent-line" aria-hidden="true"></span>
+          </div>
+          <a href="/pages/feed.html" class="btn btn--outline btn--sm">See All Posts</a>
+        </div>
+        <div class="posts-preview__grid" id="posts-preview" role="list">
+          <!-- Injected by main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Membership Teaser -->
+    <section class="section-sm" aria-labelledby="member-teaser-title">
+      <div class="container">
+        <div class="membership-teaser">
+          <div>
+            <h2 id="member-teaser-title" style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:var(--sp-3);color:#fff;">
+              Join the Inner Circle
+            </h2>
+            <p style="color:rgba(255,255,255,0.8);max-width:480px;font-size:var(--fs-sm);">
+              Get access to live match chat, exclusive events, member-only content and more. 100% ad-free, always.
+            </p>
+            <div class="membership-teaser__perks">
+              <span class="membership-teaser__perk">Live Match Chat</span>
+              <span class="membership-teaser__perk">Exclusive Events</span>
+              <span class="membership-teaser__perk">No Ads Ever</span>
+              <span class="membership-teaser__perk">Community Feed</span>
+            </div>
+          </div>
+          <a href="/pages/membership.html" class="btn btn--gold btn--lg" style="flex-shrink:0;">
+            View Plans
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">Blaugrana <span>Hub</span></div>
+          <p class="footer__tagline">
+            The unofficial, ad-free fan community for FC Barcelona supporters worldwide. Pure passion, zero ads.
+          </p>
+        </div>
+        <div>
+          <p class="footer__heading">Pages</p>
+          <ul class="footer__links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/pages/feed.html">Community Feed</a></li>
+            <li><a href="/pages/live.html">Live Events</a></li>
+            <li><a href="/pages/squad.html">Squad</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">More</p>
+          <ul class="footer__links">
+            <li><a href="/pages/history.html">Club History</a></li>
+            <li><a href="/pages/membership.html">Membership</a></li>
+            <li><a href="/pages/auth.html">Sign In</a></li>
+            <li><a href="/pages/profile.html">Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">About</p>
+          <ul class="footer__links">
+            <li><a href="#" aria-label="Privacy policy (placeholder)">Privacy Policy</a></li>
+            <li><a href="#" aria-label="Terms of service (placeholder)">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__disclaimer">⚠️ Unofficial Fan Project — Not affiliated with FC Barcelona</p>
+        <p>© 2026 Blaugrana Hub. All fan content. No ads, ever.</p>
+        <p>FC Barcelona, Camp Nou, and related marks are trademarks of Futbol Club Barcelona.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
