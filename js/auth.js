@@ -46,7 +46,8 @@ export function requireAuth(redirectUrl = '/pages/auth.html') {
 /** Guard: redirect to membership if not member/supporter */
 export function requireMember() {
   if (!isMember()) {
-    window.location.href = '/pages/membership.html';
+    const isSubdir = window.location.pathname.includes('/pages/');
+    window.location.href = isSubdir ? 'membership.html' : 'pages/membership.html';
     return false;
   }
   return true;
@@ -108,7 +109,8 @@ export function register(data) {
 
 export function logout() {
   Storage.remove(SESSION_KEY);
-  window.location.href = '/index.html';
+  const isSubdir = window.location.pathname.includes('/pages/');
+  window.location.href = isSubdir ? '../index.html' : 'index.html';
 }
 
 export function upgradeTier(newTier) {

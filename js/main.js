@@ -210,7 +210,7 @@ function initPostsPreview() {
   container.querySelectorAll('.card--link').forEach(card => {
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
-        window.location.href = '/pages/feed.html';
+        window.location.href = 'pages/feed.html';
       }
     });
   });
