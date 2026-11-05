@@ -1,0 +1,4 @@
+my-worker/
+.git/
+.wrangler/
+.DS_Store
