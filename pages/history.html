@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="FC Barcelona Club History Timeline & Trophy Cabinet — Explore 125+ years of glorious Blaugrana heritage." />
+  <meta name="description" content="FC Barcelona Club History Timeline, Trophy Cabinet, Club Records & Anthem — 125+ years of glorious Blaugrana heritage." />
   <title>Club History & Trophies — Blaugrana Hub</title>
 
   <!-- Fonts -->
@@ -99,6 +99,7 @@
 
   <main id="main-content" class="page-main section-sm">
     <div class="container">
+      <!-- Section: Trophy Cabinet -->
       <section aria-labelledby="cabinet-heading" style="margin-bottom:var(--sp-12);">
         <div class="section-header">
           <div>
@@ -106,13 +107,45 @@
             <h1 class="heading-1" id="cabinet-heading">Trophy Cabinet</h1>
             <span class="accent-line" aria-hidden="true"></span>
           </div>
-          <p class="text-xs text-muted" style="margin-top:auto;">💡 Click any trophy card to see details &amp; titles won.</p>
+          <p class="text-xs text-muted" style="margin-top:auto;">💡 Click any trophy card to see details, finals &amp; records won.</p>
         </div>
 
         <div class="trophy-cabinet" id="trophy-cabinet-container" role="list" aria-label="Major club trophies">
         </div>
       </section>
 
+      <!-- Section: All-Time Club Records -->
+      <section aria-labelledby="records-heading" style="margin-bottom:var(--sp-12);">
+        <div class="section-header">
+          <div>
+            <span class="section-header__eyebrow">Historic Statistics</span>
+            <h2 class="heading-1" id="records-heading">All-Time Club Records</h2>
+            <span class="accent-line" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:var(--sp-4);" id="records-grid-container">
+        </div>
+      </section>
+
+      <!-- Section: Club Anthem & Motto -->
+      <section class="card" style="margin-bottom:var(--sp-12);padding:var(--sp-6);background:linear-gradient(135deg, var(--color-navy-dark), #001f4d);color:#fff;border:none;">
+        <div style="max-width:760px;margin-inline:auto;text-align:center;">
+          <span class="badge badge--gold" style="margin-bottom:var(--sp-3);">The Anthem</span>
+          <h2 class="display-2" style="color:#fff;margin-bottom:var(--sp-3);">Cant del Barça</h2>
+          <p style="font-style:italic;font-size:var(--fs-md);color:rgba(255,255,255,0.9);line-height:1.7;margin-bottom:var(--sp-4);">
+            "Tot el camp és un clam, som la gent blaugrana!<br>
+            Tant se val d'on venim, si del sud o del nord,<br>
+            ara estem d'acord, estem d'acord, una bandera ens agmana!<br>
+            Blaugrana al vent, un crit valent: Tenim un nom el sap tothom:<br>
+            Barça! Barça! Baaarça!"
+          </p>
+          <p class="text-xs text-muted" style="color:rgba(255,255,255,0.65);">
+            Written by Jaume Picas &amp; Josep Maria Espinàs, music by Manuel Valls (1974) for the club's 75th anniversary.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section: Historical Timeline -->
       <section aria-labelledby="timeline-heading">
         <div class="section-header">
           <div>
@@ -126,7 +159,7 @@
           <div class="squad-search-wrap">
             <span class="squad-search-icon" aria-hidden="true">🔍</span>
             <label for="history-search-input" class="visually-hidden">Search historical milestones</label>
-            <input type="text" id="history-search-input" class="form-input" placeholder="Search timeline (Cruyff, Messi, Wembley, Sextuple)..." />
+            <input type="text" id="history-search-input" class="form-input" placeholder="Search milestones (Cruyff, Messi, Wembley, Sextuple, Treble)..." />
           </div>
 
           <div class="filter-chips" role="toolbar" aria-label="Filter timeline events">
