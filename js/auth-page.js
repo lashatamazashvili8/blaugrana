@@ -100,6 +100,8 @@ function initAuthPage() {
 
   loginFormEl?.addEventListener('submit', (e) => {
     e.preventDefault();
+    loginFormik.setFieldValue('loginId', loginIdInput.value.trim(), false);
+    loginFormik.setFieldValue('loginPassword', loginPassInput.value, false);
     loginFormik.handleSubmit(e);
   });
 
@@ -123,7 +125,7 @@ function initAuthPage() {
         return;
       }
 
-      showToast('Account created successfully! Welcome to Blaugrana Hub.', 'success');
+      showToast(`Account created and saved in local storage! Welcome, @${result.session.username}!`, 'success');
       setTimeout(() => {
         window.location.href = 'profile.html';
       }, 700);
@@ -197,6 +199,10 @@ function initAuthPage() {
 
   regFormEl?.addEventListener('submit', (e) => {
     e.preventDefault();
+    registerFormik.setFieldValue('username', regUserInput.value.trim(), false);
+    registerFormik.setFieldValue('email', regEmailInput.value.trim(), false);
+    registerFormik.setFieldValue('password', regPassInput.value, false);
+    registerFormik.setFieldValue('confirmPassword', regConfirmInput.value, false);
     registerFormik.handleSubmit(e);
   });
 

@@ -141,13 +141,13 @@
           <form id="login-form" class="auth-form" novalidate>
             <div class="form-group">
               <label for="login-id" class="form-label">Email or Username <span class="required" aria-hidden="true">*</span></label>
-              <input type="text" id="login-id" class="form-input" autocomplete="username" required placeholder="culerdemo or demo@blaugrana.hub" aria-describedby="login-id-error" />
+              <input type="text" id="login-id" name="loginId" class="form-input" autocomplete="username" required placeholder="culerdemo or demo@blaugrana.hub" aria-describedby="login-id-error" />
               <p class="form-error" id="login-id-error">Please enter your username or email address.</p>
             </div>
 
             <div class="form-group">
               <label for="login-password" class="form-label">Password <span class="required" aria-hidden="true">*</span></label>
-              <input type="password" id="login-password" class="form-input" autocomplete="current-password" required placeholder="••••••••" aria-describedby="login-password-error" />
+              <input type="password" id="login-password" name="loginPassword" class="form-input" autocomplete="current-password" required placeholder="••••••••" aria-describedby="login-password-error" />
               <p class="form-error" id="login-password-error">Password is required.</p>
             </div>
 
@@ -169,20 +169,20 @@
           <form id="register-form" class="auth-form" novalidate>
             <div class="form-group">
               <label for="reg-username" class="form-label">Username <span class="required" aria-hidden="true">*</span></label>
-              <input type="text" id="reg-username" class="form-input" autocomplete="username" required placeholder="e.g. camp_nou_hero" aria-describedby="reg-username-error" />
+              <input type="text" id="reg-username" name="username" class="form-input" autocomplete="username" required placeholder="e.g. camp_nou_hero" aria-describedby="reg-username-error" />
               <p class="form-hint">At least 3 characters (letters, numbers, underscores).</p>
               <p class="form-error" id="reg-username-error">Username must be at least 3 alphanumeric characters.</p>
             </div>
 
             <div class="form-group">
               <label for="reg-email" class="form-label">Email Address <span class="required" aria-hidden="true">*</span></label>
-              <input type="email" id="reg-email" class="form-input" autocomplete="email" required placeholder="fan@domain.com" aria-describedby="reg-email-error" />
+              <input type="email" id="reg-email" name="email" class="form-input" autocomplete="email" required placeholder="fan@domain.com" aria-describedby="reg-email-error" />
               <p class="form-error" id="reg-email-error">Please enter a valid email address.</p>
             </div>
 
             <div class="form-group">
               <label for="reg-password" class="form-label">Password <span class="required" aria-hidden="true">*</span></label>
-              <input type="password" id="reg-password" class="form-input" autocomplete="new-password" required placeholder="Min 6 characters" aria-describedby="reg-password-error" />
+              <input type="password" id="reg-password" name="password" class="form-input" autocomplete="new-password" required placeholder="Min 6 characters" aria-describedby="reg-password-error" />
               <div class="strength-bar" aria-hidden="true">
                 <div class="strength-bar__fill" id="strength-meter-bar"></div>
               </div>
@@ -195,7 +195,7 @@
 
             <div class="form-group">
               <label for="reg-confirm" class="form-label">Confirm Password <span class="required" aria-hidden="true">*</span></label>
-              <input type="password" id="reg-confirm" class="form-input" autocomplete="new-password" required placeholder="Re-enter password" aria-describedby="reg-confirm-error" />
+              <input type="password" id="reg-confirm" name="confirmPassword" class="form-input" autocomplete="new-password" required placeholder="Re-enter password" aria-describedby="reg-confirm-error" />
               <p class="form-error" id="reg-confirm-error">Passwords do not match.</p>
             </div>
 

@@ -55,14 +55,26 @@ export function requireMember() {
 
 export async function login(emailOrUsername, password) {
   const users = Storage.get(USERS_KEY) || [];
-  const hashed = await hashPassword(password);
+  const normalizedId = emailOrUsername.trim().toLowerCase();
   
   const user = users.find(u =>
-    (u.email === emailOrUsername || u.username === emailOrUsername) &&
-    (u.passwordHash === hashed || u.password === password)
+    (u.email && u.email.toLowerCase() === normalizedId) ||
+    (u.username && u.username.toLowerCase() === normalizedId)
   );
 
-  if (!user) return { ok: false, error: 'Invalid email/username or password.' };
+  if (!user) {
+    return {
+      ok: false,
+      error: `User "${emailOrUsername}" does not exist in local storage. Please check credentials or register.`
+    };
+  }
+
+  const hashed = await hashPassword(password);
+  const passwordMatches = (user.passwordHash === hashed) || (user.password === password);
+
+  if (!passwordMatches) {
+    return { ok: false, error: 'Incorrect password. Please verify and try again.' };
+  }
 
   if (user.password && !user.passwordHash) {
     user.passwordHash = hashed;
@@ -84,37 +96,40 @@ export async function login(emailOrUsername, password) {
 
 export async function register(data) {
   const users = Storage.get(USERS_KEY) || [];
+  const normalizedUser = data.username.trim().toLowerCase();
+  const normalizedEmail = data.email.trim().toLowerCase();
 
-  if (users.find(u => u.email === data.email)) {
-    return { ok: false, error: 'An account with this email already exists.' };
+  if (users.find(u => u.email && u.email.toLowerCase() === normalizedEmail)) {
+    return { ok: false, error: 'An account with this email already exists in local storage.' };
   }
-  if (users.find(u => u.username === data.username)) {
-    return { ok: false, error: 'Username already taken.' };
+  if (users.find(u => u.username && u.username.toLowerCase() === normalizedUser)) {
+    return { ok: false, error: 'Username already taken in local storage.' };
   }
 
   const passwordHash = await hashPassword(data.password);
 
-  const user = {
+  const newUser = {
     id: 'u' + Date.now(),
-    username: data.username,
-    email: data.email,
+    username: data.username.trim(),
+    email: data.email.trim(),
     passwordHash,
-    displayName: data.username,
-    bio: '',
-    favoritePlayer: '',
+    displayName: data.username.trim(),
+    bio: 'Proud Culer! 🔵🔴',
+    favoritePlayer: 'Lamine Yamal',
     tier: 'free',
     memberSince: new Date().toISOString().split('T')[0],
-    avatarInitials: data.username.slice(0, 2).toUpperCase()
+    avatarInitials: data.username.trim().slice(0, 2).toUpperCase()
   };
-  Storage.pushTo(USERS_KEY, user);
+
+  Storage.pushTo(USERS_KEY, newUser);
 
   const session = {
-    userId: user.id,
-    username: user.username,
-    displayName: user.displayName,
-    tier: user.tier,
-    memberSince: user.memberSince,
-    avatarInitials: user.avatarInitials
+    userId: newUser.id,
+    username: newUser.username,
+    displayName: newUser.displayName,
+    tier: newUser.tier,
+    memberSince: newUser.memberSince,
+    avatarInitials: newUser.avatarInitials
   };
   Storage.set(SESSION_KEY, session);
   return { ok: true, session };
