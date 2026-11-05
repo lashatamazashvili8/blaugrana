@@ -3,23 +3,8 @@
  */
 import { Storage } from './storage.js';
 import { initTheme, toggleTheme } from './theme.js';
-import { initNav, initCountUp, initLazyImages, formatDate, formatRelative, showToast } from './ui.js';
+import { initNav, initCountUp, initLazyImages, formatDate, formatRelative, showToast, seedIfNeeded } from './ui.js';
 import { updateNavUI } from './auth.js';
-
-const BASE = '.';
-
-async function seedIfNeeded() {
-  if (Storage.get('seeded')) return;
-  const files = ['users', 'posts', 'comments', 'fixtures', 'players', 'trophies', 'events'];
-  await Promise.all(files.map(async f => {
-    try {
-      const res  = await fetch(`${BASE}/js/data/${f}.json`);
-      const data = await res.json();
-      Storage.set(f, data);
-    } catch (e) { console.warn('[seed]', f, e); }
-  }));
-  Storage.set('seeded', true);
-}
 
 /* ── Countdown ── */
 function startCountdown(targetDate) {
