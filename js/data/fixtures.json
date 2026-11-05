@@ -1,0 +1,68 @@
+[
+  {
+    "id": "f1",
+    "homeTeam": "FC Barcelona",
+    "awayTeam": "Real Madrid",
+    "homeScore": null,
+    "awayScore": null,
+    "competition": "La Liga",
+    "date": "2026-11-29T21:00:00Z",
+    "venue": "Camp Nou, Barcelona",
+    "status": "upcoming"
+  },
+  {
+    "id": "f2",
+    "homeTeam": "FC Barcelona",
+    "awayTeam": "Bayern Munich",
+    "homeScore": null,
+    "awayScore": null,
+    "competition": "UEFA Champions League",
+    "date": "2026-11-23T21:00:00Z",
+    "venue": "Camp Nou, Barcelona",
+    "status": "upcoming"
+  },
+  {
+    "id": "f3",
+    "homeTeam": "Atletico Madrid",
+    "awayTeam": "FC Barcelona",
+    "homeScore": 1,
+    "awayScore": 2,
+    "competition": "La Liga",
+    "date": "2026-11-02T18:30:00Z",
+    "venue": "Metropolitano, Madrid",
+    "status": "result"
+  },
+  {
+    "id": "f4",
+    "homeTeam": "FC Barcelona",
+    "awayTeam": "Borussia Dortmund",
+    "homeScore": 3,
+    "awayScore": 1,
+    "competition": "UEFA Champions League",
+    "date": "2026-10-22T21:00:00Z",
+    "venue": "Camp Nou, Barcelona",
+    "status": "result"
+  },
+  {
+    "id": "f5",
+    "homeTeam": "Sevilla",
+    "awayTeam": "FC Barcelona",
+    "homeScore": 0,
+    "awayScore": 2,
+    "competition": "La Liga",
+    "date": "2026-10-18T21:00:00Z",
+    "venue": "Ramón Sánchez Pizjuán",
+    "status": "result"
+  },
+  {
+    "id": "f6",
+    "homeTeam": "FC Barcelona",
+    "awayTeam": "Valencia",
+    "homeScore": null,
+    "awayScore": null,
+    "competition": "Copa del Rey",
+    "date": "2026-12-10T20:30:00Z",
+    "venue": "Camp Nou, Barcelona",
+    "status": "upcoming"
+  }
+]

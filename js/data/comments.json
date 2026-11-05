@@ -1,0 +1,6 @@
+[
+  { "id": "c1", "postId": "post1", "userId": "u2", "username": "blaugrana_fan", "text": "Absolutely agree! His dribbling is just outrageous for a 18-year-old.", "timestamp": "2026-11-04T21:00:00Z" },
+  { "id": "c2", "postId": "post1", "userId": "u3", "username": "freeuser", "text": "He reminds me of a young Messi!", "timestamp": "2026-11-04T21:30:00Z" },
+  { "id": "c3", "postId": "post2", "userId": "u1", "username": "culerdemo", "text": "The difference is night and day with Pedri in the team!", "timestamp": "2026-11-03T15:00:00Z" },
+  { "id": "c4", "postId": "post5", "userId": "u1", "username": "culerdemo", "text": "Welcome to the family! Visca el Barça! 🔵🔴", "timestamp": "2026-10-29T23:00:00Z" }
+]

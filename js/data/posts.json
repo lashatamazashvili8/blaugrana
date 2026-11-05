@@ -1,0 +1,57 @@
+[
+  {
+    "id": "post1",
+    "userId": "u1",
+    "username": "culerdemo",
+    "content": "What a performance from Lamine Yamal last night! The kid is absolutely unstoppable. Future Ballon d'Or? 🔥 #ForçaBarça",
+    "tag": "Match",
+    "image": null,
+    "timestamp": "2026-11-04T20:30:00Z",
+    "likes": ["u2", "u3"],
+    "comments": ["c1", "c2"]
+  },
+  {
+    "id": "post2",
+    "userId": "u2",
+    "username": "blaugrana_fan",
+    "content": "Pedri's return from injury is exactly what we needed. The midfield control is completely different when he's on the pitch. Missed him so much! 💙❤️",
+    "tag": "Match",
+    "image": null,
+    "timestamp": "2026-11-03T14:15:00Z",
+    "likes": ["u1"],
+    "comments": ["c3"]
+  },
+  {
+    "id": "post3",
+    "userId": "u1",
+    "username": "culerdemo",
+    "content": "Transfer rumor: Apparently we're in the race for a top striker this January. What positions do you think we still need to strengthen? Drop your thoughts below 👇",
+    "tag": "Transfers",
+    "image": null,
+    "timestamp": "2026-11-02T10:00:00Z",
+    "likes": ["u2"],
+    "comments": []
+  },
+  {
+    "id": "post4",
+    "userId": "u2",
+    "username": "blaugrana_fan",
+    "content": "On this day in 1999 — Luis Figo arrived at Camp Nou. What a talent he was. Barcelona's history is just unmatched. 🏆 #Barça #History",
+    "tag": "History",
+    "image": null,
+    "timestamp": "2026-10-31T09:00:00Z",
+    "likes": ["u1", "u3"],
+    "comments": []
+  },
+  {
+    "id": "post5",
+    "userId": "u3",
+    "username": "freeuser",
+    "content": "New fan here! Just watched my first full Barça match and I'm already hooked. The passing style is just on another level. Visca el Barça! 🔵🔴",
+    "tag": "Match",
+    "image": null,
+    "timestamp": "2026-10-29T22:45:00Z",
+    "likes": ["u1", "u2"],
+    "comments": ["c4"]
+  }
+]

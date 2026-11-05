@@ -1,0 +1,38 @@
+[
+  {
+    "id": "u1",
+    "username": "culerdemo",
+    "email": "demo@blaugrana.hub",
+    "password": "Demo1234!",
+    "displayName": "Culer Demo",
+    "bio": "FC Barcelona till I die. Més que un club! 🔵🔴",
+    "favoritePlayer": "Lamine Yamal",
+    "tier": "supporter",
+    "memberSince": "2023-08-01",
+    "avatarInitials": "CD"
+  },
+  {
+    "id": "u2",
+    "username": "blaugrana_fan",
+    "email": "fan@blaugrana.hub",
+    "password": "Fan12345!",
+    "displayName": "Blaugrana Fan",
+    "bio": "Camp Nou is my second home.",
+    "favoritePlayer": "Pedri",
+    "tier": "member",
+    "memberSince": "2024-01-15",
+    "avatarInitials": "BF"
+  },
+  {
+    "id": "u3",
+    "username": "freeuser",
+    "email": "free@blaugrana.hub",
+    "password": "Free1234!",
+    "displayName": "Free User",
+    "bio": "Just exploring the site.",
+    "favoritePlayer": "Gavi",
+    "tier": "free",
+    "memberSince": "2025-03-10",
+    "avatarInitials": "FU"
+  }
+]

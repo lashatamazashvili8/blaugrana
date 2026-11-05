@@ -1,0 +1,8 @@
+[
+  { "id": "t1", "name": "La Liga", "count": 27, "emoji": "🏆", "firstWon": 1929, "category": "domestic" },
+  { "id": "t2", "name": "Champions League", "count": 5, "emoji": "⭐", "firstWon": 1992, "category": "european" },
+  { "id": "t3", "name": "Copa del Rey", "count": 31, "emoji": "🥇", "firstWon": 1910, "category": "domestic" },
+  { "id": "t4", "name": "Supercopa de España", "count": 15, "emoji": "🛡️", "firstWon": 1983, "category": "domestic" },
+  { "id": "t5", "name": "UEFA Super Cup", "count": 5, "emoji": "🌟", "firstWon": 1992, "category": "european" },
+  { "id": "t6", "name": "Club World Cup", "count": 3, "emoji": "🌍", "firstWon": 2009, "category": "world" }
+]

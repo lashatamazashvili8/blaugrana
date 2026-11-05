@@ -1,0 +1,116 @@
+[
+  {
+    "id": "pl1", "number": 1, "name": "Iñaki Peña", "nationality": "Spain",
+    "position": "Goalkeeper", "positionShort": "GK", "age": 26,
+    "emoji": "🧤",
+    "stats": { "appearances": 28, "cleanSheets": 11, "rating": 7.4 }
+  },
+  {
+    "id": "pl2", "number": 25, "name": "Wojciech Szczęsny", "nationality": "Poland",
+    "position": "Goalkeeper", "positionShort": "GK", "age": 34,
+    "emoji": "🧤",
+    "stats": { "appearances": 12, "cleanSheets": 5, "rating": 7.2 }
+  },
+  {
+    "id": "pl3", "number": 2, "name": "Héctor Fort", "nationality": "Spain",
+    "position": "Defender", "positionShort": "DEF", "age": 19,
+    "emoji": "🛡️",
+    "stats": { "appearances": 22, "goals": 1, "assists": 3, "rating": 7.1 }
+  },
+  {
+    "id": "pl4", "number": 3, "name": "Alejandro Balde", "nationality": "Spain",
+    "position": "Defender", "positionShort": "DEF", "age": 21,
+    "emoji": "🛡️",
+    "stats": { "appearances": 30, "goals": 2, "assists": 7, "rating": 7.6 }
+  },
+  {
+    "id": "pl5", "number": 15, "name": "Pau Cubarsí", "nationality": "Spain",
+    "position": "Defender", "positionShort": "DEF", "age": 18,
+    "emoji": "🛡️",
+    "stats": { "appearances": 32, "goals": 2, "assists": 1, "rating": 7.8 }
+  },
+  {
+    "id": "pl6", "number": 23, "name": "Jules Koundé", "nationality": "France",
+    "position": "Defender", "positionShort": "DEF", "age": 26,
+    "emoji": "🛡️",
+    "stats": { "appearances": 28, "goals": 3, "assists": 5, "rating": 7.7 }
+  },
+  {
+    "id": "pl7", "number": 4, "name": "Ronald Araújo", "nationality": "Uruguay",
+    "position": "Defender", "positionShort": "DEF", "age": 25,
+    "emoji": "🛡️",
+    "stats": { "appearances": 20, "goals": 2, "assists": 0, "rating": 7.5 }
+  },
+  {
+    "id": "pl8", "number": 14, "name": "João Cancelo", "nationality": "Portugal",
+    "position": "Defender", "positionShort": "DEF", "age": 30,
+    "emoji": "🛡️",
+    "stats": { "appearances": 25, "goals": 1, "assists": 6, "rating": 7.3 }
+  },
+  {
+    "id": "pl9", "number": 5, "name": "Inigo Martínez", "nationality": "Spain",
+    "position": "Defender", "positionShort": "DEF", "age": 33,
+    "emoji": "🛡️",
+    "stats": { "appearances": 18, "goals": 1, "assists": 0, "rating": 7.0 }
+  },
+  {
+    "id": "pl10", "number": 8, "name": "Pedri", "nationality": "Spain",
+    "position": "Midfielder", "positionShort": "MID", "age": 22,
+    "emoji": "⚡",
+    "stats": { "appearances": 26, "goals": 8, "assists": 10, "rating": 8.4 }
+  },
+  {
+    "id": "pl11", "number": 6, "name": "Gavi", "nationality": "Spain",
+    "position": "Midfielder", "positionShort": "MID", "age": 20,
+    "emoji": "⚡",
+    "stats": { "appearances": 24, "goals": 4, "assists": 8, "rating": 8.1 }
+  },
+  {
+    "id": "pl12", "number": 20, "name": "Dani Olmo", "nationality": "Spain",
+    "position": "Midfielder", "positionShort": "MID", "age": 26,
+    "emoji": "⚡",
+    "stats": { "appearances": 28, "goals": 11, "assists": 7, "rating": 8.2 }
+  },
+  {
+    "id": "pl13", "number": 17, "name": "Marc Casadó", "nationality": "Spain",
+    "position": "Midfielder", "positionShort": "MID", "age": 21,
+    "emoji": "⚡",
+    "stats": { "appearances": 30, "goals": 1, "assists": 3, "rating": 7.5 }
+  },
+  {
+    "id": "pl14", "number": 22, "name": "Ilkay Gündogan", "nationality": "Germany",
+    "position": "Midfielder", "positionShort": "MID", "age": 36,
+    "emoji": "⚡",
+    "stats": { "appearances": 22, "goals": 5, "assists": 9, "rating": 7.9 }
+  },
+  {
+    "id": "pl15", "number": 16, "name": "Fermín López", "nationality": "Spain",
+    "position": "Midfielder", "positionShort": "MID", "age": 22,
+    "emoji": "⚡",
+    "stats": { "appearances": 25, "goals": 7, "assists": 5, "rating": 7.8 }
+  },
+  {
+    "id": "pl16", "number": 19, "name": "Lamine Yamal", "nationality": "Spain",
+    "position": "Forward", "positionShort": "FWD", "age": 17,
+    "emoji": "🌟",
+    "stats": { "appearances": 32, "goals": 18, "assists": 15, "rating": 9.1 }
+  },
+  {
+    "id": "pl17", "number": 9, "name": "Robert Lewandowski", "nationality": "Poland",
+    "position": "Forward", "positionShort": "FWD", "age": 38,
+    "emoji": "🌟",
+    "stats": { "appearances": 30, "goals": 24, "assists": 8, "rating": 8.8 }
+  },
+  {
+    "id": "pl18", "number": 11, "name": "Raphinha", "nationality": "Brazil",
+    "position": "Forward", "positionShort": "FWD", "age": 27,
+    "emoji": "🌟",
+    "stats": { "appearances": 32, "goals": 20, "assists": 14, "rating": 8.9 }
+  },
+  {
+    "id": "pl19", "number": 29, "name": "Pau Víctor", "nationality": "Spain",
+    "position": "Forward", "positionShort": "FWD", "age": 24,
+    "emoji": "🌟",
+    "stats": { "appearances": 20, "goals": 8, "assists": 4, "rating": 7.6 }
+  }
+]

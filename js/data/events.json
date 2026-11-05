@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ev1",
+    "type": "match",
+    "title": "El Clásico Watch Party",
+    "description": "Watch FC Barcelona vs Real Madrid live with fellow Culers worldwide!",
+    "date": "2026-11-29T20:00:00Z",
+    "status": "upcoming",
+    "memberOnly": false,
+    "attendees": 1240
+  },
+  {
+    "id": "ev2",
+    "type": "podcast",
+    "title": "Barça Talk: Tactics Deep Dive",
+    "description": "Our analysts break down Barça's high-press system and what makes it so effective this season.",
+    "date": "2026-11-08T19:00:00Z",
+    "status": "upcoming",
+    "memberOnly": false,
+    "attendees": 380
+  },
+  {
+    "id": "ev3",
+    "type": "watch",
+    "title": "Champions League Live: Barça vs Bayern",
+    "description": "Stream the UCL group stage match together with live commentary from our community.",
+    "date": "2026-11-23T20:30:00Z",
+    "status": "upcoming",
+    "memberOnly": true,
+    "attendees": 892
+  },
+  {
+    "id": "ev4",
+    "type": "fan",
+    "title": "Member Q&A: Ask the Community",
+    "description": "Exclusive members-only live Q&A with our most knowledgeable community experts.",
+    "date": "2026-11-15T18:00:00Z",
+    "status": "upcoming",
+    "memberOnly": true,
+    "attendees": 215
+  },
+  {
+    "id": "ev5",
+    "type": "match",
+    "title": "Copa del Rey: Barça vs Valencia",
+    "description": "Live match room for Copa del Rey Round of 16.",
+    "date": "2026-12-10T20:00:00Z",
+    "status": "upcoming",
+    "memberOnly": false,
+    "attendees": 560
+  },
+  {
+    "id": "ev6",
+    "type": "podcast",
+    "title": "Transfer Window Special",
+    "description": "Who should Barça sign in January? Members debate the best targets for the winter window.",
+    "date": "2026-11-20T20:00:00Z",
+    "status": "upcoming",
+    "memberOnly": true,
+    "attendees": 320
+  }
+]
